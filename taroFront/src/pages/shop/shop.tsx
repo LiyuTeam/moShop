@@ -3,9 +3,10 @@ import Taro, {Component, Config} from '@tarojs/taro'
 import {View, Image, Swiper, SwiperItem} from '@tarojs/components'
 import {observer, inject} from '@tarojs/mobx'
 import {AtIcon, AtAvatar, AtBadge} from 'taro-ui'
+import ProductListNormal from '../../components/productList/normal'
+
 import './shop.styl'
 
-import ProductListNormal from './productList/normal'
 
 type PageStateProps = {
   counterStore: {
@@ -112,7 +113,7 @@ class Shop extends Component {
             </AtBadge>
           </View>
           {newUsers.map((user, index) => (
-            <AtBadge 
+            <AtBadge
               key={index}
               value={index || 0}
             >
