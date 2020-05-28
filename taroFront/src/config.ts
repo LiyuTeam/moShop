@@ -1,3 +1,7 @@
+declare const hosts: {
+  api: string
+}
+
 if (process.env.TARO_APP_API === 'dev') {
   hosts.api = ''
 } else if (process.env.TARO_APP_API === 'test') {
@@ -9,3 +13,5 @@ if (process.env.TARO_APP_API === 'dev') {
 } else {
   hosts.api = ''
 }
+
+export default hosts

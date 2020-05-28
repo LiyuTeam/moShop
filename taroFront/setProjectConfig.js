@@ -1,7 +1,9 @@
 const fs = require('fs')
+
 const config = {}
 const testAppId = 'test'
 const prodAppId = 'prod'
+console.log('running mode is ' + process.env.TARO_APP_API)
 switch (process.env.TARO_APP_API) {
   case 'dev':
     config.appid = testAppId
@@ -25,8 +27,8 @@ function writeJson() {
     if (err) {
       return console.error(err)
     }
-    var person = { ...JSON.parse(data.toString()), ...config }
-    var str = JSON.stringify(person)
+    const person = {...JSON.parse(data.toString()), ...config}
+    const str = JSON.stringify(person)
     fs.writeFile('./project.config.json', str, (writeFileErr) => {
       if (writeFileErr) {
         console.error(writeFileErr);
