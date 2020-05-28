@@ -21,11 +21,11 @@
     "build:rn": "taro build --type rn",
     "build:qq": "taro build --type qq",
     "build:quickapp": "taro build --type quickapp",
-    "dev:weapp": "npm run build:weapp -- --watch",
+    "dev:weapp": "npm run set:dev && cross-env TARO_APP_TYPE=weapp TARO_APP_API=test taro build --type weapp --watch",
     "dev:swan": "npm run build:swan -- --watch",
     "dev:alipay": "npm run build:alipay -- --watch",
     "dev:tt": "npm run build:tt -- --watch",
-    "dev:h5": "npm run set:dev && cross-env taro build --type h5 --watch",
+    "dev:h5": "npm run set:dev && cross-env cross-env TARO_APP_TYPE=h5 TARO_APP_API=test taro build --type h5 --watch",
     "dev:rn": "npm run build:rn -- --watch",
     "dev:qq": "npm run build:qq -- --watch",
     "dev:quickapp": "npm run build:quickapp -- --watch"
@@ -56,8 +56,6 @@
     "stylus": "^0.54.7"
   },
   "devDependencies": {
-    "@tarojs/mini-runner": "2.2.6",
-    "@tarojs/webpack-runner": "2.2.6",
     "@types/react": "^16.4.6",
     "@types/webpack-env": "^1.13.6",
     "@typescript-eslint/eslint-plugin": "^2.13.0",
@@ -69,9 +67,9 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
+    "babel-eslint": "^8.2.3",
     "eslint": "^5.16.0",
     "eslint-config-taro": "2.2.6",
-    "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-react": "^7.8.2",
     "eslint-plugin-react-hooks": "^1.6.1",
     "eslint-plugin-taro": "2.2.6",
@@ -80,6 +78,9 @@
     "stylelint": "^13.5.0",
     "stylelint-config-taro-rn": "2.2.6",
     "stylelint-taro-rn": "2.2.6",
+    "eslint-plugin-taro": "2.2.6",
+    "@typescript-eslint/eslint-plugin": "^2.13.0",
+    "@typescript-eslint/parser": "^2.13.0",
     "typescript": "^3.0.1"
   }
 }
