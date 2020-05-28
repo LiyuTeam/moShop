@@ -1,11 +1,12 @@
 import {ComponentType} from 'react'
 import Taro, {Component, Config} from '@tarojs/taro'
-import {View, Image, Swiper, SwiperItem} from '@tarojs/components'
+import {View, Swiper, SwiperItem} from '@tarojs/components'
 import {observer, inject} from '@tarojs/mobx'
 import {AtIcon, AtAvatar, AtBadge} from 'taro-ui'
 import ProductListNormal from '../../components/productList/normal'
 
 import './shop.styl'
+import Picture from "../../components/picture/picture";
 
 
 type PageStateProps = {
@@ -91,12 +92,11 @@ class Shop extends Component {
         >
           {swiperItems.map((item, index) => (
             <SwiperItem>
-              <Image
+              <Picture
                 key={index}
                 src={item}
-                style={{width: 100}}
-                mode='widthFix'
-              ></Image>
+                width='100%'
+              />
             </SwiperItem>
           ))}
         </Swiper>

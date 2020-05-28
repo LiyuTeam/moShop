@@ -1,9 +1,9 @@
 import Taro, {Component} from "@tarojs/taro"
 import AtComponent from "taro-ui/types/base";
-import {View} from "@tarojs/components"
-import {AtCard} from "taro-ui"
+import {View, Text} from "@tarojs/components"
 
 import Picture from "../picture/picture"
+import {classNameBuilder as className} from "../../units/className.helper"
 import './normal.styl'
 
 export interface ProductListNormalProps extends AtComponent {
@@ -25,20 +25,23 @@ class ProductListNormal extends Component<ProductListNormalProps> {
 
     return (
       <View className={['productList', 'normal'].join('-')}>
-        <View className='at-row'>
+        <View className='at-row at-row--wrap'>
           {products.map((p, i) => (
-              <AtCard
+              <View
                 key={i}
-                className='at-col at-col-6'
-                note='New!!'
+                className={className({props: [['at', 'col'], ['at', 'col', '6'],]})}
               >
-                <Picture
-                  key={i}
-                  src={p}
-                  className={['productList', 'item', 'thumb'].join('-')}
-                  mode='widthFix'
-                />
-              </AtCard>
+                <View
+                  className={className({props: [['at', 'row'], ['at', 'row', '-wrap']]})}
+                >
+                  <Picture
+                    key={i}
+                    src={p}
+                    className={className({props: [['productList', 'item', 'thumb']]})}
+                  />
+                  <Text>Price : $99.00</Text>
+                </View>
+              </View>
             )
           )}
         </View>
