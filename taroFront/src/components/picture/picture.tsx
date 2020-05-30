@@ -9,12 +9,18 @@ export interface PictureProps extends AtComponent {
   src?: string
   width?: number | string
   height?: number | string
-  mode?: ImageProps.mode
+  wh?: number | 0.75
+  mode?: keyof ImageProps.mode
 }
 
-class Picture extends Component<PictureProps> {
+export interface PictureState {
+  loadFinishedClass?: 'load-finished' | ''
+}
+
+class Picture extends Component<PictureProps, PictureState> {
 
   constructor(props: PictureProps) {
+    props.mode = props.mode || 'scaleToFill'
     super(props);
     this.state = {loadFinishedClass: ''}
   }
@@ -25,14 +31,18 @@ class Picture extends Component<PictureProps> {
    */
   loadFinished(e: Event) {
     console.log('pic load finished', e)
-    this.setState({loadFinishedClass: 'picture-load-finished'})
+    this.setState({loadFinishedClass: 'load-finished'})
   }
 
   render() {
     const picSrc: string = this.props.src || '';
     const styles = {
       width: this.props.width || '100%',
-      height: this.props.height,
+      height: typeof this.props.height === 'undefined' ?
+        'auto' :
+        Number.isInteger(this.props.height) ?
+          this.props.height as number * (this.props.wh || 1) :
+          this.props.height,
       overflow: 'hidden'
     }
 
@@ -40,8 +50,12 @@ class Picture extends Component<PictureProps> {
       <Image
         src={picSrc}
         style={styles}
-        className={[this.props.className || '', this.state.loadFinishedClass].join(' ')}
-        mode={this.props.mode || 'scaleToFill'}
+        className={[
+          'picture',
+          this.props.className || '',
+          this.state.loadFinishedClass
+        ].join(' ')}
+        mode={this.props.mode}
         onLoad={this.loadFinished.bind(this)}
       />
     )

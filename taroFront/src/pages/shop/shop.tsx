@@ -22,6 +22,16 @@ interface Shop {
   props: PageStateProps
 }
 
+export type ProductDataImpl = {
+  itemId: string
+  itemThumb?: string
+  price?: number | null
+  originPrice?: number
+  status: 'active' | 'inactive'
+  title: string
+  labels?: string[]
+}
+
 @inject('counterStore')
 @observer
 class Shop extends Component {
@@ -77,8 +87,16 @@ class Shop extends Component {
 
   render() {
     const testImg = 'https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=https%3A%2F%2Ftimgsa.baidu.com%2Ftimg%3Fimage%26quality%3D80%26size%3Db9999_10000%26sec%3D1590440638913%26di%3Db9a7aeca1ea86570c459e7a2775b0063%26imgtype%3D0%26src%3Dhttp%253A%252F%252Fn1.itc.cn%252Fimg8%252Fwb%252Fsmccloud%252Frecom%252F2015%252F11%252F05%252F144670339594709418.JPEG&thumburl=https%3A%2F%2Fss1.bdstatic.com%2F70cFvXSh_Q1YnxGkpoWK1HF6hhy%2Fit%2Fu%3D3152169011%2C1792675578%26fm%3D26%26gp%3D0.jpg'
-
-    const swiperItems: string[] = [testImg, testImg, testImg, testImg]
+    const productData: ProductDataImpl = {
+      title: "我是标题",
+      itemId: Math.random() * 100000 + '',
+      itemThumb: testImg,
+      price: 99,
+      originPrice: 199.50,
+      status: "active",
+      labels: ['b1f1', '50%off']
+    }
+    const swiperItems: ProductDataImpl[] = [productData, productData, productData, productData, productData]
     const newUsers = '随,机,选,其,一,些,用,户'.split(',')
 
     // const {counterStore: {counter}} = this.props
@@ -94,7 +112,7 @@ class Shop extends Component {
             <SwiperItem>
               <Picture
                 key={index}
-                src={item}
+                src={item.itemThumb}
                 width='100%'
               />
             </SwiperItem>
@@ -113,17 +131,13 @@ class Shop extends Component {
             </AtBadge>
           </View>
           {newUsers.map((user, index) => (
-            <AtBadge
+            <AtAvatar
               key={index}
-              value={index || 0}
+              size='small'
+              circle
+              text={user}
             >
-              <AtAvatar
-                size='small'
-                circle
-                text={user}
-              >
-              </AtAvatar>
-            </AtBadge>
+            </AtAvatar>
           ))}
         </View>
         <View>

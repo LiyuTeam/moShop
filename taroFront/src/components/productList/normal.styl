@@ -1,9 +1,66 @@
+$gap = 4pt
+$highColor = #c74242
+// 产品列表
+
 .productList
-  &-normal
-    background aliceblue
-    padding 8pt
-    marigin 0 12pt
-    border-radius 8pt
+  margin $gap
+  margin-bottom: $gap
+  width 'calc(100% - %s * 2)' % $gap
+  height auto
+  overflow hidden
+
+  //  产品项
+
   &-item
-    width 320pt
-    height 180pt
+    margin $gap
+    margin-bottom: $gap
+    width 'calc(100% - %s * 2)' % $gap
+    border-radius 10pt 10pt 0 0
+    overflow: hidden;
+    //border rgba(0,0,0,0.18) 1px solid
+    margin-bottom $gap * 2
+    //  产品列表标题
+
+    &-title
+      padding $gap
+      font-size 12pt
+
+    //  产品属性区域
+
+    &-opts
+      padding 0 $gap
+      align-items center
+
+      //  产品属性区域 - 产品售价
+
+      &-price
+        margin 0 $gap
+        font-size 14pt
+        font-family Arial
+        color $highColor
+        font-style oblique
+
+      //  产品属性区域 - 产品原价 - 打折时生效
+
+      &-origin
+        font-size 10pt
+        font-family Arial
+        color $highColor
+        font-style oblique
+        text-decoration: line-through
+        &::before
+          content '$'
+
+      //  产品属性区域 - 产品标签(多个)
+
+      &-label
+        align-content center
+        font-size 8pt
+        line-height @font-size * 2.2
+        font-family Arial
+        background $highColor
+        border-radius $gap
+        color white
+        padding @font-size * 0 @font-size * 0.3
+        margin @font-size* 0.5 @font-size * 0.3
+        height @font-size * 2
