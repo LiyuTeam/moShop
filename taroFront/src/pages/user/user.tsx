@@ -2,6 +2,7 @@ import { ComponentType } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Button, Text } from '@tarojs/components'
 import { observer, inject } from '@tarojs/mobx'
+import userForm from '../../components/userForm/userForm'
 
 import './user.styl'
 
@@ -30,7 +31,7 @@ class User extends Component {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
-    navigationBarTitleText: '首页'
+    navigationBarTitleText: '用户'
   }
 
   componentWillMount () { }
@@ -63,16 +64,21 @@ class User extends Component {
   }
 
   render () {
-    const { counterStore: { counter } } = this.props
+    const userData = {
+      form: {
+        name: 'Kevin',
+        email: 'kevincn.tang@outlook.com',
+        job: 'Web Developer',
+        star: 1
+      }
+    }
+
     return (
       <View className='user'>
-        <Button onClick={this.increment}>+</Button>
-        <Button onClick={this.decrement}>-</Button>
-        <Button onClick={this.incrementAsync}>Add Async</Button>
-        <Text>{counter}</Text>
+          <userForm userData={userData}></userForm>
       </View>
     )
   }
 }
 
-export default User  as ComponentType
+export default User as ComponentType
