@@ -31,7 +31,8 @@
     "reflect-metadata": "^0.1.13",
     "seneca": "^3.21.2",
     "sqlite3": "^4.2.0",
-    "typeorm": "^0.2.25"
+    "typeorm": "^0.2.25",
+    "tcb-admin-node": "^1.23.0"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",

@@ -8,6 +8,11 @@ export default (appInfo: EggAppInfo) => {
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1590863397980_2851';
   config.graphql = graphqlConfig;
+  config.typeoprm = {
+    enable: true,
+    package: 'egg-ts-typeorm',
+  };
+
   // add your egg config in here
   config.middleware = [ 'graphql' ];
 
