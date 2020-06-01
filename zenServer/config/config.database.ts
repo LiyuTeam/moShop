@@ -1,5 +1,5 @@
 export default () => ({
   clients: [
-    { name: 'sqlite', type: 'sqlite', database: '../static/database.db', synchronize: true },
+    { name: 'sqlite', type: 'sqlite', database: 'main', host: '../static/database.db', synchronize: true },
   ],
 });

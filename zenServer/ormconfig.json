@@ -9,7 +9,7 @@
   "logging": false,
   "entities": [
     "src/entity/**/*.ts",
-    "app/entities"
+    "app/entities/**/*.ts"
   ],
   "migrations": [
     "src/migration/**/*.ts"

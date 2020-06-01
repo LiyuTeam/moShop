@@ -11,6 +11,10 @@ const plugin: EggPlugin = {
     enable: true,
     package: 'egg-graphql',
   },
+  typeorm: {
+    enable: true,
+    package: 'egg-ts-typeorm',
+  },
 };
 
 export default plugin;

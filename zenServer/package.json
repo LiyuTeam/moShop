@@ -36,16 +36,17 @@
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",
-    "@types/supertest": "^2.0.0",
     "@types/node": "^14.0.6",
+    "@types/supertest": "^2.0.0",
     "autod": "^3.0.1",
     "autod-egg": "^1.1.0",
-    "egg-ci": "^1.8.0",
     "egg-bin": "^4.11.0",
+    "egg-ci": "^1.8.0",
     "egg-mock": "^3.16.0",
-    "tslib": "^1.9.0",
     "eslint": "^6.7.2",
     "eslint-config-egg": "^8.0.0",
+    "ts-graphql-plugin": "^1.12.0",
+    "tslib": "^1.9.0",
     "typescript": "^3.0.0"
   },
   "engines": {

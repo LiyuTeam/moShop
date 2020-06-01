@@ -1,5 +1,8 @@
 type User {
     id: ID!
-    name: String!
-    items:[Item!]
+    account: String!
+    password:String!
 }
+
+
+
