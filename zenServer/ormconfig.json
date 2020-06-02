@@ -1,12 +1,7 @@
 {
-  "type": "sqlite",
-  "host": "localhost",
-  "port": 3306,
-  "username": "test",
-  "password": "test",
-  "database": "test",
-  "synchronize": true,
-  "logging": false,
+  "default": {
+    "entitiesdir": "app/entities/**/*.ts"
+  },
   "entities": [
     "src/entity/**/*.ts",
     "app/entities/**/*.ts"

@@ -1,5 +1,10 @@
-export default () => ({
-  clients: [
-    { name: 'sqlite', type: 'sqlite', database: 'main', host: '../static/database.db', synchronize: true },
-  ],
-});
+import { SqliteConnectionOptions } from 'typeorm/driver/sqlite/SqliteConnectionOptions';
+
+export default {
+  client: {
+    type: 'sqlite',
+    database: '../static/database.db',
+    synchronize: true,
+    // entitiesdir: 'app/entities/',
+  } as SqliteConnectionOptions,
+};
