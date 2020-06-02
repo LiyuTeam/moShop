@@ -2,21 +2,21 @@ import { ComponentType } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Button, Text } from '@tarojs/components'
 import { observer, inject } from '@tarojs/mobx'
-import userForm from '../../components/userForm/userForm'
+import UserForm from '../../components/userForm/userForm'
 
 import './user.styl'
 
 type PageStateProps = {
   counterStore: {
-    counter: number,
-    increment: Function,
-    decrement: Function,
+    counter: number
+    increment: Function
+    decrement: Function
     incrementAsync: Function
   }
 }
 
 interface User {
-  props: PageStateProps;
+  props: PageStateProps
 }
 
 @inject('counterStore')
@@ -64,18 +64,17 @@ class User extends Component {
   }
 
   render () {
-    const userData = {
-      form: {
-        name: 'Kevin',
-        email: 'kevincn.tang@outlook.com',
-        job: 'Web Developer',
-        star: 1
-      }
-    }
+    const userData = [
+      {label: 'Name', field:'name', value:'Kevin'},
+      {label: 'Nick Name', field:'nickname', value:'777'},
+      {label: 'Email', field:'email', value:'kevincn.tang@outlook.com'},
+      {label: 'Phone', field:'phone', value:'15011760892'}
+    ]
 
     return (
+
       <View className='user'>
-          <userForm userData={userData}></userForm>
+          <UserForm userData={userData}></UserForm>
       </View>
     )
   }

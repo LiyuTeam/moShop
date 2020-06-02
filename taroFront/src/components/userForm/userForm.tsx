@@ -1,48 +1,74 @@
 /**
- * desc：  userForm
+ * desc：  UserForm
  * author：Kevin
  * date：  2020/6/1
  **/
-import Taro, {Component} from "@tarojs/taro"
-import AtComponent from "taro-ui/types/base";
-import {AtCard} from "taro-ui"
-import {View,Form,Switch} from "@tarojs/components"
+import Taro, { Component } from '@tarojs/taro';
+import AtComponent from 'taro-ui/types/base';
+import {View} from "@tarojs/components";
+import { AtForm, AtInput, AtButton } from 'taro-ui'
 
-import './userForm.styl'
-import Picture from "../picture/picture";
+import './UserForm.styl';
 
-export interface userFormProps extends AtComponent {
+export interface UserFormProps extends AtComponent {
   /**
-   * @default {} * 用户信息
+   * @default [] * 用户信息
    */
-  userData: object{}
+  userData: any[]
 }
 
-class userForm extends Component<userFormProps> {
+class UserForm extends Component<UserFormProps> {
 
-  constructor(props) {
-    super(props);
-    console.log(props)
-  }
 
-  formSubmit = e => {
-    console.log(e)
-  }
+    constructor(props) {
+        super(props);
+        console.log(props);
+        this.state = {
+            value: ''
+        };
+    }
 
-  formReset = e => {
-    console.log(e)
-  }
+    handleChange (value) {
+        this.setState({
+            value
+        });
+    }
+    onSubmit (event) {
+        console.log(event);
+    }
+    onReset (event) {
+      console.log(event)
+      this.setState({
+        value: ''
+      });
+    }
 
-  render() {
-    const userData = this.props.userData;
-    return (
-      <Form onSubmit={this.formSubmit} onReset={this.formReset} >
-        <View className={className}>
-          <Switch name='switch' className='form-switch'></Switch>
-        </View>
-      </Form>
-    )
-  }
+    render() {
+        const userData = this.props.userData;
+        console.log(this.state['value']);
+        return (
+            <AtForm
+              onSubmit={this.onSubmit.bind(this)}
+              onReset={this.onReset.bind(this)}
+            >
+              {console.log(userData)}
+              <View>
+                {userData.map((item) => (
+                  <AtInput
+                    name={item['field']}
+                    title={item['label']}
+                    type='text'
+                    placeholder='单行文本'
+                    value={item['value']}
+                    onChange={this.handleChange.bind(this, item['value'])}
+                  />
+                ))}
+              </View>
+              <AtButton type='primary' size='normal' formType='submit'>提交</AtButton>
+              <AtButton formType='reset'>重置</AtButton>
+            </AtForm>
+        );
+    }
 }
 
-export default userForm
+export default UserForm;

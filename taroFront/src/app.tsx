@@ -7,6 +7,8 @@ import counterStore from './store/counter'
 import './app.styl'
 // eslint-disable-next-line import/first
 import 'taro-ui/dist/style/index.scss'
+import "taro-ui/dist/style/components/button.scss";
+import "taro-ui/dist/style/components/loading.scss";
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
