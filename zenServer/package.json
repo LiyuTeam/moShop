@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "data-forge": "^1.8.9",
+    "dataloader": "^2.0.0",
     "egg": "^2.6.1",
     "egg-graphql": "^2.8.0",
     "egg-scripts": "^2.6.0",
@@ -31,8 +32,8 @@
     "reflect-metadata": "^0.1.13",
     "seneca": "^3.21.2",
     "sqlite3": "^4.2.0",
-    "typeorm": "^0.2.25",
-    "tcb-admin-node": "^1.23.0"
+    "tcb-admin-node": "^1.23.0",
+    "typeorm": "^0.2.25"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",

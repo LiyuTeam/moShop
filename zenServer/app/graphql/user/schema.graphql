@@ -1,5 +1,6 @@
 type Query{
-    user(id:ID!):User
+    user(account:String!):User
+#    me:User
 }
 
 type User {
