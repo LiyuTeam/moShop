@@ -19,10 +19,10 @@ export default class User extends Service {
   }
 
   public async getUser(props: any) {
-    console.log(this.ctx.entitles);
-    console.log(this.ctx.repo);
-    return await this.ctx.repo.user.createQueryBuilder('user')
-      .where('user.account = :account', { account: props })
-      .getOne();
+    // return await this.ctx.service.graphql.query(JSON.stringify({ query: `{ user(account: ${props.account}) { account is_admin } }` }));
+    // return await this.ctx.repo.User.createQueryBuilder('user')
+    //   .where('user.account = :account', { account: props })
+    //   .getOne();
+    return await this.ctx.entities.User.find({ account: props.account });
   }
 }

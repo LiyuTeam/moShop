@@ -21,6 +21,7 @@
     "skipDefaultLibCheck": true,
     "inlineSourceMap": true,
     "importHelpers": true,
+    "moduleResolution": "node",
     "plugins": [
       {
         "name": "ts-graphql-plugin",

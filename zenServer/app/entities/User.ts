@@ -1,7 +1,7 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-class User extends BaseEntity {
+class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -17,7 +17,7 @@ class User extends BaseEntity {
   @Column()
   is_admin: boolean;
 
-  @Column('enum')
+  @Column()
   status: 1 | 2 | 3
 
 }

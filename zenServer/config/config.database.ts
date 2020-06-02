@@ -1,10 +1,11 @@
 import { SqliteConnectionOptions } from 'typeorm/driver/sqlite/SqliteConnectionOptions';
 
 export default {
-  client: {
+  clients: [ {
+    name: 'default',
     type: 'sqlite',
-    database: '../static/database.db',
+    database: './static/database.db',
+    entities: [ 'app/entities/' ],
     synchronize: true,
-    // entitiesdir: 'app/entities/',
-  } as SqliteConnectionOptions,
+  } as SqliteConnectionOptions ],
 };
