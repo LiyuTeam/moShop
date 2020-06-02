@@ -34,6 +34,6 @@ export default class User extends Service {
     // return await this.ctx.repo.User.createQueryBuilder('user')
     //   .where('user.account = :account', { account: props })
     //   .getOne();
-    return await this.ctx.entities.User.find({ account: props.account });
+    return await this.ctx.repo('User').find({ account: props.account });
   }
 }
