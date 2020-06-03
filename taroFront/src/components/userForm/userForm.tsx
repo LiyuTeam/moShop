@@ -58,6 +58,7 @@ class UserForm extends Component<UserFormProps> {
                     name={item['field']}
                     title={item['label']}
                     type='text'
+                    
                     placeholder='单行文本'
                     value={item['value']}
                     onChange={this.handleChange.bind(this, item['value'])}
