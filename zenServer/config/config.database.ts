@@ -6,7 +6,7 @@ export default {
     name: 'default',
     type: 'sqlite',
     database: join(resolve(__dirname), '..', 'static', 'database.db'),
-    entities: [ 'app/entities/**/*.ts' ],
+    entities: [ 'app/entities/' ],
     synchronize: true,
   } as SqliteConnectionOptions ],
 };

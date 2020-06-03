@@ -9,7 +9,7 @@ const plugin: EggPlugin = {
 
   graphql: {
     enable: true,
-    package: 'egg-graphql',
+    package: '@liyu_team/egg-typescript-graphql',
   },
   typeorm: {
     enable: true,

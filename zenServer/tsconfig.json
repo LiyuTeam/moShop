@@ -1,7 +1,8 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "target": "es2017",
+    "target": "es2018",
+    "lib": ["es2018","esnext.asynciterable"],
     "module": "commonjs",
     "strict": true,
     "noImplicitAny": false,

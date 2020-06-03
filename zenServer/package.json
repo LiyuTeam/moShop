@@ -11,7 +11,7 @@
     "start": "egg-scripts start --daemon --title=egg-server-zenServer",
     "stop": "egg-scripts stop --title=egg-server-zenServer",
     "dev": "egg-bin dev",
-    "debug": "egg-bin debug",
+    "debug": "egg-bin debug --inspect-brk",
     "test-local": "egg-bin test",
     "test": "npm run lint -- --fix && npm run test-local",
     "cov": "egg-bin cov",
@@ -26,6 +26,7 @@
     "dataloader": "^2.0.0",
     "egg": "^2.6.1",
     "egg-graphql": "^2.8.0",
+    "type-graphql": "^1.0.0-rc.2",
     "egg-scripts": "^2.6.0",
     "egg-ts-typeorm": "^1.1.12",
     "lodash": "^4.17.15",
@@ -33,7 +34,8 @@
     "seneca": "^3.21.2",
     "sqlite3": "^4.2.0",
     "tcb-admin-node": "^1.23.0",
-    "typeorm": "^0.2.25"
+    "typeorm": "^0.2.25",
+    "@liyu_team/egg-typescript-graphql": "^2.8.2"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",

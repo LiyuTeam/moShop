@@ -4,8 +4,8 @@ import { Controller } from 'egg';
 export default class UserController extends Controller {
   public async index() {
     const { ctx } = this;
-    ctx.body = await ctx.service.user.getUser({ account: 'admin' });
-    console.log(ctx.repo, ctx.entities);
+    this.logger.info(this.ctx);
+    ctx.body = 'hi';
   }
 
   public async addUser() {

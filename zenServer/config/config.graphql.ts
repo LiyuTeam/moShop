@@ -4,11 +4,11 @@ export default {
   // 是否加载到 app 上，默认开启
   app: true,
   // 是否加载到 agent 上，默认关闭
-  agent: true,
+  agent: false,
   // 是否加载开发者工具 graphiql, 默认开启。路由同 router 字段。使用浏览器打开该可见。
   graphiql: true,
   // 是否设置默认的Query和Mutation, 默认关闭
-  defaultEmptySchema: true,
+  defaultEmptySchema: false,
   // graphQL 路由前的拦截器
   // * onPreGraphQL(ctx) {
   // },

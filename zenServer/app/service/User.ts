@@ -1,20 +1,13 @@
 import { Service } from 'egg';
-import { getConnection } from 'typeorm';
-import { Connection } from 'typeorm/connection/Connection';
+import UserModel from '../entities/User';
 /**
- * Test Service
+ * User Service
  */
 export default class User extends Service {
 
-  conn: Connection
-
-  constructor(props: any) {
-    super(props);
-    this.conn = getConnection();
-  }
-
-  public async insUser(props: {account: string}) {
-    const user = new this.ctx.entities.User();
+  public async insUser(props: { account: string }) {
+    this.logger.info(this.ctx.entities);
+    const user = new this.ctx.entities(this.ctx);
     user.account = props.account;
 
     const checkUser = await this.ctx.repo.user.findOne({ account: props.account });
@@ -27,13 +20,9 @@ export default class User extends Service {
   }
 
   public async getUser(props: any) {
-    console.debug('entities', this.ctx.entities);
-    console.debug('repo', this.ctx.repo);
-    console.debug('repo', this.conn);
-    // return await this.ctx.service.graphql.query(JSON.stringify({ query: `{ user(account: ${props.account}) { account is_admin } }` }));
-    // return await this.ctx.repo.User.createQueryBuilder('user')
-    //   .where('user.account = :account', { account: props })
-    //   .getOne();
-    return await this.ctx.repo('User').find({ account: props.account });
+    this.logger.info(this.ctx.entities);
+    return await UserModel.createQueryBuilder()
+      .where('user.account = :account', { account: props })
+      .getOne();
   }
 }

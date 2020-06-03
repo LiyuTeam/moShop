@@ -8,10 +8,7 @@ class UserConnector {
     this.loader = new DataLoader(this.getUser.bind(this));
   }
   async getUser(account) {
-    // return await this.ctx.service.user.getUser(account)
-    return this.ctx.repo.User.createQueryBuilder()
-      .where('user.account = :account', { account })
-      .getOne();
+    return await this.ctx.service.user.getUser(account);
   }
 }
 module.exports = UserConnector;
