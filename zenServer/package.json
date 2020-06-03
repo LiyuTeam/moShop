@@ -35,7 +35,7 @@
     "sqlite3": "^4.2.0",
     "tcb-admin-node": "^1.23.0",
     "typeorm": "^0.2.25",
-    "@liyu_team/egg-typescript-graphql": "^2.8.2"
+    "@liyu_team/egg-typescript-graphql": "^2.8.1"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",

@@ -1,5 +1,4 @@
 import { Service } from 'egg';
-import UserModel from '../entities/User';
 /**
  * User Service
  */
@@ -20,8 +19,9 @@ export default class User extends Service {
   }
 
   public async getUser(props: any) {
-    this.logger.info(this.ctx.entities);
-    return await UserModel.createQueryBuilder()
+    const repo = await this.ctx.autoEntities.get('default#user')();
+    this.logger.info(this.ctx.autoEntities, repo);
+    return repo.createQueryBuilder()
       .where('user.account = :account', { account: props })
       .getOne();
   }

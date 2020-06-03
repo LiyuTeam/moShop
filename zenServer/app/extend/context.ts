@@ -7,10 +7,7 @@ export default {
     return this.get('X-Requested-With') === 'XMLHttpRequest';
   },
   get autoEntities() {
-    if (!this[Symbol('autoEntities')]) {
-      this[Symbol('autoEntities')] = autoEntities(this as Context);
-    }
-    return this[Symbol('autoEntities')];
+    return autoEntities.call(this, this as Context);
   },
 };
 
