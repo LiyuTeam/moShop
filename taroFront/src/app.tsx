@@ -7,8 +7,12 @@ import counterStore from './store/counter'
 import './app.styl'
 // eslint-disable-next-line import/first
 import 'taro-ui/dist/style/index.scss'
+// eslint-disable-next-line import/first
 import "taro-ui/dist/style/components/button.scss";
+// eslint-disable-next-line import/first
 import "taro-ui/dist/style/components/loading.scss";
+// eslint-disable-next-line import/first
+import "./assets/font-awesome/scss/font-awesome.scss";
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
@@ -39,17 +43,18 @@ class App extends Component {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
+      navigationBarTextStyle: 'black',
     },
-    tabBar: {
-      list: [
-        {text: '商城',pagePath:'pages/shop/shop'},
-        {text: '促销',pagePath:'pages/index/index'},
-        {text: '钱包',pagePath:'pages/index/index'},
-        {text: '订单',pagePath:'pages/index/index'},
-        {text: '我',pagePath:'pages/user/user'}
-      ]
-    }
+    // TODO 注释配置的tabbar，使用自定义tabbar
+    // tabBar: {
+    //   list: [
+    //     {text: '商城',pagePath:'pages/shop/shop'},
+    //     {text: '促销',pagePath:'pages/index/index'},
+    //     {text: '钱包',pagePath:'pages/index/index'},
+    //     {text: '订单',pagePath:'pages/index/index'},
+    //     {text: '我',pagePath:'pages/user/user', iconPath: "./assets/tab-bar/user.png", selectedIconPath: "./assets/tab-bar/user-active.png"}
+    //   ]
+    // }
   }
 
   componentDidMount() {

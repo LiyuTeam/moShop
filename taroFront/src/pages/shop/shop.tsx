@@ -3,10 +3,11 @@ import Taro, {Component, Config} from '@tarojs/taro'
 import {View, Swiper, SwiperItem} from '@tarojs/components'
 import {observer, inject} from '@tarojs/mobx'
 import {AtIcon, AtAvatar, AtBadge} from 'taro-ui'
-import ProductListNormal from '../../components/productList/normal'
+import ProductListNormal from '../../components/productList/Normal'
 
 import './shop.styl'
-import Picture from "../../components/picture/picture";
+import Picture from "../../components/picture/Picture";
+import TabBar from "../../components/tabBar/TabBar";
 
 
 type PageStateProps = {
@@ -143,6 +144,7 @@ class Shop extends Component {
         <View>
           <ProductListNormal products={swiperItems}></ProductListNormal>
         </View>
+        <TabBar tabBarData={[]} />
       </View>
     )
   }

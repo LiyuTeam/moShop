@@ -2,9 +2,9 @@ import Taro, {Component} from "@tarojs/taro"
 import AtComponent from "taro-ui/types/base";
 import {View, Text} from "@tarojs/components"
 
-import Picture from "../picture/picture"
+import Picture from "../picture/Picture"
 import {classNameBuilder as className} from "../../units/className.helper"
-import './normal.styl'
+import './Normal.styl'
 import {ProductDataImpl} from "../../pages/shop/shop";
 
 export interface ProductListNormalProps extends AtComponent {
