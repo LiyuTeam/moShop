@@ -3,19 +3,18 @@ import * as fs from 'fs';
 import { Context, Application } from 'egg';
 import walkPath from './walkPath';
 // import { BaseEntity, ConnectionOptions, getRepository } from 'typeorm';
-import { ConnectionOptions, createConnection, getConnection } from 'typeorm';
+import { ConnectionOptions, Connection, getConnectionManager } from 'typeorm';
 
 /**
  * 自动扫描clients中的entities路径文件,加入到ctx.autoEntities中
  * @param ctx
  */
-export function autoEntities(ctx: Context) {
+export async function autoEntities(ctx: Context): Promise<Map<string, any>> {
   const SYMBOL_AUTO_ENTITIES = Symbol('Context#autoEntities');
   const app: Application = ctx.app;
 
   //  整理clients / client配置
   const clients = new Map();
-  const classes = new Map();
 
   if (!ctx[SYMBOL_AUTO_ENTITIES.toString()]) {
 
@@ -30,35 +29,62 @@ export function autoEntities(ctx: Context) {
     }
 
     if (clients.size > 0) {
-      clients.forEach((client: ConnectionOptions, name: string) => {
+
+      const connMan = getConnectionManager();
+      const classes = new Map();
+      for (const name of clients.keys()) {
+        const client: ConnectionOptions = clients.get(name);
         const entitiesPaths = client.entities?.map(p =>
-          walkPath.walkFiles(path.join(app.baseDir, p.toString()), 'ts')
-        ).reduce((o, v) => o.concat(v), []);
+          walkPath.walkFiles(path.join(app.baseDir, path.dirname(p.toString())), 'ts')
+          ).reduce((o, v) => o.concat(v), []) as string[];
+
         Object.assign(client, { entitiesPaths });
         clients.set(name, client);
 
-        entitiesPaths?.forEach(entity => {
+        ctx.logger.debug('clients entities paths', client);
+
+        for (const entity of entitiesPaths) {
           const entityPath = path.join(entity);
-          ctx.logger.info(entityPath);
+
           if (fs.existsSync(entityPath)) {
-            const Entity = () => import(entityPath);
-            classes.set(`${name.toLowerCase()}#${path.basename(entity).split('.')[0].toLowerCase()}`, async () => {
-              let conn = getConnection(client.name);
-              if (!conn) {
-                conn = await createConnection(client);
-              }
+            // const Entity = () => import(entityPath);
+            const EntityName = path.basename(entity).split('.')[0].toLowerCase();
+            const ConnName = [
+              name.toLowerCase(),
+              EntityName,
+            ].join('#');
 
-              return conn.getRepository(Entity);
-            });
+            classes.set(ConnName,
+              async () => {
+                let conn: Connection;
+                try {
+                  conn = connMan.get(ConnName);
+                } catch (e) {
+                  const repoClientConfig = Object.assign(
+                    {}, client,
+                    {
+                      name: ConnName,
+                      entities: [ entityPath.replace(app.baseDir, '') ],
+                    },
+                  );
+                  await connMan.create(repoClientConfig).connect()
+                    .then(connection => {
+                      ctx.logger.info('create database conn ok, name ', connection.name, connection.options);
+                      return connection;
+                    });
+                  conn = connMan.get(ConnName);
+                }
+
+                return conn.getRepository(EntityName);
+              });
           }
-        });
-
-      });
+        }
+      }
+      ctx[SYMBOL_AUTO_ENTITIES.toString()] = classes;
+      ctx.logger.info('entities', ctx[SYMBOL_AUTO_ENTITIES.toString()]);
     } else {
-      //   ctx.logger.error('typeorm need configuration client or clients');
+      ctx.logger.error('typeorm need configuration client or clients');
     }
-
-
     // const entitiesPaths: string[] | undefined = app.config.typeorm.clients ?
     //   app.config.typeorm.clients.reduce((o: string[], v: any) => o.concat(v.entities), []) : [];
     //
@@ -77,9 +103,6 @@ export function autoEntities(ctx: Context) {
     //     classes.set(path.basename(client).split('.')[0].toLowerCase(), Entity);
     //   }
     // });
-
-    ctx[SYMBOL_AUTO_ENTITIES.toString()] = classes;
-    ctx.logger.info('entities', ctx[SYMBOL_AUTO_ENTITIES.toString()]);
   }
 
   return ctx[SYMBOL_AUTO_ENTITIES.toString()];

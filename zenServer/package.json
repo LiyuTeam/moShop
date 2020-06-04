@@ -11,7 +11,7 @@
     "start": "egg-scripts start --daemon --title=egg-server-zenServer",
     "stop": "egg-scripts stop --title=egg-server-zenServer",
     "dev": "egg-bin dev",
-    "debug": "egg-bin debug --inspect-brk",
+    "debug": "egg-bin debug",
     "test-local": "egg-bin test",
     "test": "npm run lint -- --fix && npm run test-local",
     "cov": "egg-bin cov",

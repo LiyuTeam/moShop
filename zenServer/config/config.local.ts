@@ -4,6 +4,7 @@ import databaseConfig from './config.database';
 
 export default () => {
   const config: PowerPartial<EggAppConfig> = {};
+  config.env = 'local';
   config.graphql = graphqlConfig;
   config.typeorm = databaseConfig;
   config.middleware = [ 'graphql' ];

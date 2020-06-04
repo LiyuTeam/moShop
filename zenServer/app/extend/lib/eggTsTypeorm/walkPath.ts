@@ -35,7 +35,9 @@ export default {
         children = children.concat(subChildren);
         fileMatch = fileMatch.concat(fileMatches);
       } else if (fileExt && stat.isFile()) {
-        fileMatch.push(deepPath.replace(basePath + path.sep, ''));
+        console.debug('walk match a target file', deepPath);
+        // fileMatch.push(deepPath.replace(basePath + path.sep, ''));
+        fileMatch.push(deepPath);
       }
     });
     return { subChildren: children, fileMatches: fileMatch };
