@@ -2,7 +2,7 @@ import Taro, {Component} from "@tarojs/taro"
 import AtComponent from "taro-ui/types/base";
 import {Image} from "@tarojs/components";
 import {ImageProps} from "@tarojs/components/types/Image";
-import './picture.styl'
+import './Picture.styl'
 
 export interface PictureProps extends AtComponent {
   className?: string

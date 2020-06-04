@@ -1,8 +1,8 @@
 import { ComponentType } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Button, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import { observer, inject } from '@tarojs/mobx'
-import UserForm from '../../components/userForm/userForm'
+import UserForm from '../../components/userForm/UserForm'
 
 import './user.styl'
 
