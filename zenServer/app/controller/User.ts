@@ -4,7 +4,7 @@ import { Controller } from 'egg';
 export default class UserController extends Controller {
   public async index() {
     const { ctx } = this;
-    this.logger.info('default eti', this.ctx.entities);
+    this.logger.info('default eti', this.ctx.autoEntities);
     ctx.body = await this.ctx.service.user.getUser('test');
   }
 
