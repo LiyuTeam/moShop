@@ -1,11 +1,16 @@
+/**
+ * desc：  Promotion
+ * author：Kevin
+ * date：  2020/6/5
+ **/
+
 import { ComponentType } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Button, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import { observer, inject } from '@tarojs/mobx'
 
-import { AtFab } from 'taro-ui'
-
-import './index.styl'
+import './promotion.styl'
+import TabBar from "../../components/tabBar/TabBar";
 
 type PageStateProps = {
   counterStore: {
@@ -16,13 +21,13 @@ type PageStateProps = {
   }
 }
 
-interface Index {
+interface Promotion {
   props: PageStateProps
 }
 
 @inject('counterStore')
 @observer
-class Index extends Component {
+class Promotion extends Component {
 
   /**
    * 指定config的类型声明为: Taro.Config
@@ -32,7 +37,7 @@ class Index extends Component {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
-    navigationBarTitleText: '首页'
+    navigationBarTitleText: '促销'
   }
 
   componentWillMount () { }
@@ -65,19 +70,15 @@ class Index extends Component {
   }
 
   render () {
-    const { counterStore: { counter } } = this.props
+    const pageType = 'Promotion'
     return (
-      <View className='index'>
-        <AtFab>
-          <Text className='at-fab__icon at-icon at-icon-menu'></Text>
-        </AtFab>
-        <Button onClick={this.increment}>+</Button>
-        <Button onClick={this.decrement}>-</Button>
-        <Button onClick={this.incrementAsync}>Add Async</Button>
-        <Text>{counter}</Text>
+
+      <View className='promotion'>
+        {pageType}
+        <TabBar tabBarStore={[]} currentPage={1} />
       </View>
     )
   }
 }
 
-export default Index  as ComponentType
+export default Promotion as ComponentType

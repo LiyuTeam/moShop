@@ -1,8 +1,13 @@
+import "taro-ui/dist/style/components/avatar.scss";
 import { ComponentType } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View } from '@tarojs/components'
+import { AtAvatar, AtNavBar } from 'taro-ui'
 import { observer, inject } from '@tarojs/mobx'
+
 import UserForm from '../../components/userForm/UserForm'
+
+import TabBar from "../../components/tabBar/TabBar";
 
 import './user.styl'
 
@@ -62,19 +67,37 @@ class User extends Component {
     const { counterStore } = this.props
     counterStore.incrementAsync()
   }
-
+  handleEdit = () => {
+    console.log('handleEdit')
+  }
   render () {
+    const { counterStore: { counter } } = this.props
+    console.log(counter)
     const userData = [
-      {label: 'Name', field:'name', value:'Kevin'},
+      {label: 'Name', field:'name', value:'凯文'},
       {label: 'Nick Name', field:'nickname', value:'777'},
       {label: 'Email', field:'email', value:'kevincn.tang@outlook.com'},
       {label: 'Phone', field:'phone', value:'15011760892'}
     ]
-
+    console.log(userData);
     return (
 
       <View className='user'>
-          <UserForm userData={userData}></UserForm>
+        <AtNavBar
+          onClickRgIconSt={this.handleEdit}
+          color='#000'
+          rightFirstIconType='user'
+        >
+          <View>我的</View>
+        </AtNavBar>
+        {/*<UserForm userData={userData} />*/}
+        <View className='header'>
+          <AtAvatar className='head_portrait' circle size='large' text='我的头像' image='https://jdc.jd.com/img/200' />
+          <View className='name'>凯文</View>
+          <View className='vip'>钻石会员</View>
+          <View className='phone'>15077777777</View>
+        </View>
+        <TabBar tabBarStore={[]} currentPage={4} />
       </View>
     )
   }
