@@ -9,7 +9,6 @@ import Taro, { Component } from '@tarojs/taro';
 import AtComponent from 'taro-ui/types/base';
 import {View} from "@tarojs/components";
 import { AtForm, AtInput, AtNavBar } from 'taro-ui'
-import TabBar from '../tabBar/TabBar'
 
 import './UserForm.styl';
 
@@ -25,7 +24,6 @@ class UserForm extends Component<UserFormProps> {
 
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = {
             value: ''
         };
@@ -49,7 +47,6 @@ class UserForm extends Component<UserFormProps> {
         console.log('click')
     }
     render() {
-      console.log(this.state['value'])
       const userData = this.props.userData;
       return (
         <View>
@@ -83,7 +80,6 @@ class UserForm extends Component<UserFormProps> {
             {/*<AtButton type='primary' size='normal' formType='submit'>提交</AtButton>*/}
             {/*<AtButton formType='reset'>重置</AtButton>*/}
           </AtForm>
-          <TabBar tabBarData={[]} />
         </View>
       );
     }

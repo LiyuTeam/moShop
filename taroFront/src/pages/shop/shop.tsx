@@ -144,7 +144,7 @@ class Shop extends Component {
         <View>
           <ProductListNormal products={swiperItems}></ProductListNormal>
         </View>
-        <TabBar tabBarData={[]} />
+        <TabBar tabBarStore={[]} currentPage={0} />
       </View>
     )
   }

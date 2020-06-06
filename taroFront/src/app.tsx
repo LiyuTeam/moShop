@@ -4,6 +4,7 @@ import Index from './pages/index'
 
 
 import counterStore from './store/counter'
+import tabBarStore from './store/tabbar'
 import './app.styl'
 // eslint-disable-next-line import/first
 import 'taro-ui/dist/style/index.scss'
@@ -21,7 +22,8 @@ import "./assets/font-awesome/scss/font-awesome.scss";
 // }
 
 const store = {
-  counterStore
+  counterStore,
+  tabBarStore
 }
 
 class App extends Component {
@@ -36,6 +38,9 @@ class App extends Component {
   config: Config = {
     pages: [
       'pages/shop/shop',
+      'pages/promotion/promotion',
+      'pages/wallet/wallet',
+      'pages/order/order',
       'pages/index/index',
       'pages/user/user'
     ],
