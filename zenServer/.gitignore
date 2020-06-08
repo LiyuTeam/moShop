@@ -19,3 +19,7 @@ app/**/*.map
 test/**/*.map
 config/**/*.map
 /test/
+/typings/
+/main
+/package-lock.json
+/.github/workflows/nodejs.yml
