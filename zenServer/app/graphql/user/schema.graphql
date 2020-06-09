@@ -1,12 +1,14 @@
 type Query{
-    user(id:String!):User
+  user(id:String!):User
 }
 
 type User {
-    id: ID!
-    account: String!
-    password:String!
+  id: ID!
+  account: String!
+  password:String!
 }
 
+type Mutation{
 
-
+  createItem(account:String!,password:String!):User
+}

@@ -6,4 +6,10 @@ module.exports = {
       return await ctx.connector.user.getUser(account);
     },
   },
+  Mutation: {
+    async createItem(root: any, { account, password }, ctx) {
+      root = root;
+      return await ctx.connector.user.insUser(account, password);
+    },
+  },
 };

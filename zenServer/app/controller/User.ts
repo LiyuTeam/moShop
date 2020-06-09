@@ -8,8 +8,14 @@ export default class UserController extends Controller {
     ctx.body = await this.ctx.service.user.getUser('test');
   }
 
+
   public async addUser() {
     const { ctx } = this;
     ctx.body = await ctx.service.user.insUser({ account: String(Math.random() * 1000000) });
+  }
+
+  public async login() {
+    const { ctx } = this;
+    console.log(ctx);
   }
 }
