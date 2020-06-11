@@ -1,6 +1,6 @@
 import { Field, ID, InterfaceType, ObjectType, Arg, Ctx, Query, Resolver } from 'type-graphql';
-import { UserAccountType } from '../../types/schemaType';
 import { IsEmail, IsPhoneNumber } from 'class-validator';
+import { UserAccountType } from '../../types/schemaType';
 import { Context } from 'egg';
 
 @InterfaceType()
@@ -38,21 +38,21 @@ abstract class UserAccountABC implements UserAccountType {
 @ObjectType({ implements: UserAccountABC, description: '用户账户数据结构' })
 export class UserAccount implements UserAccountABC {
   account: string;
-  createdAt: Date;
   isAdmin: number;
   password: string;
   phone: number;
   secretToken: string;
-  updatedAt: Date;
   userName: string;
   uuid: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 
 @Resolver(UserAccount)
 export class UserAccountResolver {
 
-  @Query(() => [ UserAccount ])
+  @Query(() => UserAccount)
   async getUser(
     @Ctx() ctx: Context,
       @Arg('account', { nullable: true }) account?: string,
@@ -65,5 +65,14 @@ export class UserAccountResolver {
     @Ctx() ctx: Context,
   ): Promise<any> {
     return await ctx.service.user.listUser();
+  }
+
+  @Query(() => Boolean)
+  async loginUser(
+  @Ctx() ctx: Context,
+    @Arg('account') account?: string,
+    @Arg('password') password?: string,
+  ) {
+    return await ctx.service.user.loginUser({ account, password });
   }
 }

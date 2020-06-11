@@ -1,5 +1,7 @@
 import { Service } from 'egg';
 import { v4 as uuid } from 'uuid';
+import { UserAccountType } from '../types/schemaType';
+
 /**
  * User Service
  */
@@ -7,8 +9,9 @@ export default class User extends Service {
 
   public async insUser(props: { account?: string }) {
     const { ctx } = this;
-    const user = Object.assign({ }, props, {
-      account: props.account || new Date().toISOString() });
+    const user = Object.assign({}, props, {
+      account: props.account || new Date().toISOString(),
+    });
     const checkUser = await ctx.repo.UserAccount.findOne(user);
     console.log(checkUser);
     if (!checkUser) {
@@ -32,4 +35,17 @@ export default class User extends Service {
     return await ctx.repo.UserAccount.find();
   }
 
+  public async loginUser(props: { account?: string; password?: string }) {
+    const { ctx } = this;
+    ctx.logger.info('props', props);
+    const loginUser: any|UserAccountType = await ctx.repo.UserAccount.findOne({ account: props.account });
+    if (loginUser && loginUser.password === props.password) {
+      loginUser.isAdmin = true;
+      loginUser.updatedAt = new Date();
+      await ctx.repo.UserAccount.save(loginUser);
+      return true;
+    }
+    return false;
+
+  }
 }

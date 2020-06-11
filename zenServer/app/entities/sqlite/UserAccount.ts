@@ -1,8 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { UserAccountType } from '../../types/schemaType';
 
 @Entity()
-class UserAccount implements UserAccountType {
+class UserAccount extends BaseEntity implements UserAccountType {
 
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -27,10 +27,16 @@ class UserAccount implements UserAccountType {
 
   @Column({ default: null, comment: '用户秘钥' })
   secretToken: string;
-  createdAt: Date;
-  updatedAt: Date;
-  userName: string;
 
+  @Column({ default: null, comment: '创建时间' })
+  createdAt: Date;
+
+  @Column({ default: null, comment: '更新时间' })
+  updatedAt: Date;
+
+  @Column({ default: null, comment: '用户昵称' })
+  userName: string;
 }
+
 
 export default UserAccount;
