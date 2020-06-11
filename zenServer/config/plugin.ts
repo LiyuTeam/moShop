@@ -7,10 +7,10 @@ const plugin: EggPlugin = {
   //   package: 'egg-view-nunjucks',
   // },
 
-  graphql: {
-    enable: true,
-    package: '@liyu_team/egg-typescript-graphql',
-  },
+  // graphql: {
+  //   enable: true,
+  //   package: '@liyu_team/egg-typescript-graphql',
+  // },
   typeorm: {
     enable: true,
     package: 'egg-ts-typeorm',

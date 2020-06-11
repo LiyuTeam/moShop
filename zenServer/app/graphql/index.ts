@@ -20,19 +20,24 @@ export default class GraphQL {
     this.config = app.config.graphql;
   }
 
-  getResolvers() {
+  getResolvers(): [string] {
     const isLocal = this.app.env === 'local';
     return [ path.resolve(this.app.baseDir, `app/graphql/schema/**/*.${isLocal ? 'ts' : 'js'}`) ];
   }
 
   async init() {
-    this.graphqlSchema = await buildSchema({
-      resolvers: this.getResolvers(),
-      dateScalarMode: 'timestamp',
-    });
+    try {
+      // console.log(this.getResolvers());
+      this.graphqlSchema = await buildSchema({
+        resolvers: this.getResolvers(),
+        dateScalarMode: 'timestamp',
+      });
+    } catch (e) {
+      console.trace(e);
+    }
     const server = new ApolloServer({
       schema: this.graphqlSchema,
-      tracing: false,
+      tracing: true,
       context: ({ ctx }) => ctx, // 将 egg 的 context 作为 Resolver 传递的上下文
       playground: {
         settings: {

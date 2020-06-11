@@ -7,10 +7,10 @@ export default () => {
   config.env = 'local';
   config.graphql = graphqlConfig;
   config.typeorm = databaseConfig;
-  config.middleware = [ 'graphql' ];
+  // config.middleware = [ 'graphql' ];
   config.security = {
     csrf: {
-      ignore: '/graphql',
+      ignore: [ '/graphql', '/graphql2' ],
     },
   };
   return config;

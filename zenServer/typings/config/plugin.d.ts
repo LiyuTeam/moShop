@@ -14,7 +14,6 @@ import 'egg-schedule';
 import 'egg-static';
 import 'egg-jsonp';
 import 'egg-view';
-import '@liyu_team/egg-typescript-graphql';
 import 'egg-ts-typeorm';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
@@ -31,7 +30,6 @@ declare module 'egg' {
     static?: EggPluginItem;
     jsonp?: EggPluginItem;
     view?: EggPluginItem;
-    graphql?: EggPluginItem;
     typeorm?: EggPluginItem;
   }
 }

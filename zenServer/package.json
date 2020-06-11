@@ -22,20 +22,23 @@
     "clean": "ets clean"
   },
   "dependencies": {
+    "@liyu_team/egg-typescript-graphql": "^2.8.1",
     "data-forge": "^1.8.9",
     "dataloader": "^2.0.0",
     "egg": "^2.6.1",
     "egg-graphql": "^2.8.0",
-    "type-graphql": "^1.0.0-rc.2",
     "egg-scripts": "^2.6.0",
     "egg-ts-typeorm": "^1.1.12",
+    "graphql": "^15.1.0",
     "lodash": "^4.17.15",
     "reflect-metadata": "^0.1.13",
     "seneca": "^3.21.2",
     "sqlite3": "^4.2.0",
     "tcb-admin-node": "^1.23.0",
+    "type-graphql": "^1.0.0-rc.2",
     "typeorm": "^0.2.25",
-    "@liyu_team/egg-typescript-graphql": "^2.8.1"
+    "class-validator": "^0.12.2",
+    "apollo-server-koa": "^2.14.3"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",
