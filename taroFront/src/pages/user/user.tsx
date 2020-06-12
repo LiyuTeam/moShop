@@ -15,15 +15,15 @@ import "./user.styl";
 
 type PageStateProps = {
   counterStore: {
-    counter: number;
-    increment: Function;
-    decrement: Function;
-    incrementAsync: Function;
-  };
+    counter: number
+    increment: Function
+    decrement: Function
+    incrementAsync: Function
+  }
 };
 
 interface User {
-  props: PageStateProps;
+  props: PageStateProps
 }
 
 @inject("counterStore")
@@ -84,26 +84,28 @@ class User extends Component {
     ];
     console.log(userData);
     return (
-      <View className="user">
+      <View className='user'>
         <AtNavBar
           onClickRgIconSt={this.handleEdit}
-          color="#000"
-          rightFirstIconType="user"
+          color='#000'
+          rightFirstIconType='user'
         >
           <View>我的</View>
         </AtNavBar>
         {/*<UserForm userData={userData} />*/}
-        <View className="header">
+        <View className='header'>
           <AtAvatar
-            className="head_portrait"
+            className='head_portrait'
             circle
-            size="large"
-            text="我的头像"
-            image="https://jdc.jd.com/img/200"
+            size='large'
+            text='我的头像'
+            image='https://jdc.jd.com/img/200'
           />
-          <View className="name">凯文</View>
-          <View className="vip">钻石会员</View>
-          <View className="phone">15077777777</View>
+          <View className='name'>凯文</View>
+          <View className='vip'>钻石会员</View>
+          <View className='phone'>15077777777</View>
+
+          <View className='info'></View>
         </View>
         <TabBar tabBarStore={[]} currentPage={4} />
       </View>
