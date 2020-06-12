@@ -1,14 +1,14 @@
-import GraphQL from '../graphql/index';
+import typeGraphql from './lib/eggTsGraphql';
+import typeNuxt from './lib/eggTsNuxt';
 import { Application } from 'egg';
 
-const TYPE_GRAPHQL_SYMBOL = Symbol('Application#TypeGraphql');
 
 export default {
-  get graphql(): GraphQL {
-    if (!this[TYPE_GRAPHQL_SYMBOL]) {
-      this[TYPE_GRAPHQL_SYMBOL] = new GraphQL(this as Application);
-    }
-    return this[TYPE_GRAPHQL_SYMBOL];
+  get typeGraphql() {
+    return typeGraphql.application(this as Application);
+  },
+  get typeNuxt() {
+    return typeNuxt.application(this as Application);
   },
 };
 
