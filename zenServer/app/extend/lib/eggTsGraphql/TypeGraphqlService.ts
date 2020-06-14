@@ -58,6 +58,7 @@ export default class TypeGraphql {
       cors: false,
     });
     this.app.logger.info('graphql server init');
+
   }
 
   // async query({query, var})
