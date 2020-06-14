@@ -2,13 +2,9 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "es2018",
-    "lib": [
-      "es2018",
-      "esnext",
-      "esnext.asynciterable",
-      "dom"
-    ],
+    "lib": ["es2018","esnext.asynciterable"],
     "module": "commonjs",
+    "strict": true,
     "noImplicitAny": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -27,30 +23,7 @@
     "inlineSourceMap": true,
     "importHelpers": true,
     "moduleResolution": "node",
-    "plugins": [
-      {
-        "name": "ts-graphql-plugin",
-        "schema": "path-or-url-to-your-schema.graphql",
-        "tag": "gql"
-      }
-    ],
-    "esModuleInterop": true,
-    "sourceMap": true,
-    "strict": true,
-    "noEmit": true,
-    "baseUrl": ".",
-    "paths": {
-      "~/*": [
-        "./*"
-      ],
-      "@/*": [
-        "./*"
-      ]
-    },
-    "types": [
-      "@types/node",
-      "@nuxt/types"
-    ]
+    "esModuleInterop": true
   },
   "exclude": [
     "app/public",

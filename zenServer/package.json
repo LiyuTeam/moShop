@@ -19,13 +19,10 @@
     "ci": "npm run lint && npm run cov && npm run tsc",
     "autod": "autod",
     "lint": "eslint . --ext .ts",
-    "clean": "ets clean"
+    "clean": "ets clean",
+    "generate": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
-    "@liyu_team/egg-typescript-graphql": "^2.8.1",
-    "@nuxt/types": "^0.7.8",
-    "@nuxt/typescript-build": "^1.0.2",
-    "@nuxt/typescript-runtime": "^0.4.9",
     "apollo-server-koa": "^2.14.3",
     "class-validator": "^0.12.2",
     "data-forge": "^1.8.9",
@@ -36,7 +33,6 @@
     "egg-ts-typeorm": "^1.1.12",
     "graphql": "^15.1.0",
     "lodash": "^4.17.15",
-    "nuxt": "^2.12.2",
     "reflect-metadata": "^0.1.13",
     "seneca": "^3.21.2",
     "sqlite3": "^4.2.0",
@@ -46,6 +42,13 @@
     "vue-property-decorator": "^8.4.2"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.15.3",
+    "@graphql-codegen/introspection": "1.15.3",
+    "@graphql-codegen/typescript": "1.15.3",
+    "@graphql-codegen/typescript-document-nodes": "1.15.3",
+    "@graphql-codegen/typescript-mongodb": "1.15.3",
+    "@graphql-codegen/typescript-resolvers": "1.15.3",
+    "@graphql-codegen/typescript-type-graphql": "^1.15.3",
     "@types/mocha": "^2.2.40",
     "@types/node": "^14.0.6",
     "@types/supertest": "^2.0.0",
