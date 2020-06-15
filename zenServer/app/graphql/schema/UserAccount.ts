@@ -4,7 +4,7 @@ import { UserAccountType } from '../../types/schemaType';
 import { Context } from 'egg';
 
 @InterfaceType()
-abstract class UserAccountABC implements UserAccountType {
+abstract class UserAccountAPIInterface implements UserAccountType {
   @Field(() => String, { description: '用户账户ID' })
   uuid: string
 
@@ -35,8 +35,8 @@ abstract class UserAccountABC implements UserAccountType {
   updatedAt: Date;
 }
 
-@ObjectType({ implements: UserAccountABC, description: '用户账户数据结构' })
-export class UserAccount implements UserAccountABC {
+@ObjectType({ implements: UserAccountAPIInterface, description: '用户账户数据结构' })
+export class UserAccount implements UserAccountAPIInterface {
   @Field() account: string;
   @Field() isAdmin: number;
   @Field() password: string;

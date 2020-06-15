@@ -2,13 +2,13 @@ overwrite: true
 schema: "http://localhost:7001/graphql"
 documents: null
 generates:
-  ./app/graphql/generaters/schema.ts:
-    plugins:
-      - "typescript"
-      - "typescript-resolvers"
-#      - "typescript-mongodb"
-      - "typescript-document-nodes"
-  ./graphql.schema.json:
+#  ./app/graphql/generaters/schema.ts:
+#    plugins:
+#      - "typescript"
+#      - "typescript-resolvers"
+##      - "typescript-mongodb"
+#      - "typescript-document-nodes"
+  ./app/graphql/generaters/graphql.schema.json:
     plugins:
       - "introspection"
   ./app/graphql/generaters/schemaTypes.ts:
