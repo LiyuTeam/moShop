@@ -7,3 +7,6 @@
 *.iml
 out
 gen
+/zenAdmin/node_modules/
+/zenAdmin/src/.umi/
+/zenAdmin/package-lock.json
