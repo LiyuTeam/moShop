@@ -1,10 +1,9 @@
 // https://umijs.org/config/
-import { defineConfig } from 'umi';
+import {defineConfig} from 'umi';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
 
-const { REACT_APP_ENV } = process.env;
-
+const {REACT_APP_ENV} = process.env;
 export default defineConfig({
   hash: true,
   antd: {},
@@ -42,7 +41,6 @@ export default defineConfig({
         },
       ],
     },
-
     {
       path: '/welcome',
       name: 'welcome',
@@ -75,6 +73,12 @@ export default defineConfig({
       redirect: '/welcome',
     },
     {
+      name: '个人设置',
+      icon: 'smile',
+      path: '/modules',
+      component: './Modules',
+    },
+    {
       component: './404',
     },
   ],
@@ -90,4 +94,23 @@ export default defineConfig({
   manifest: {
     basePath: '/',
   },
+  plugins: [
+    // ['umi-plugin-react', {
+    //   routes: {
+    //     exclude: [
+    //       /schema\.(js|jsx|ts|tsx)$/,
+    //       /resolvers\.(js|jsx|ts|tsx)$/,
+    //     ],
+    //   },
+    //   // other umi-plugin-react options
+    // }],
+    // ['umi-plugin-apollo', {
+    //   uri: 'https://48p1r2roz4.sse.codesandbox.io/',
+    //   // options: './',
+    //   hooksImportFrom: 'react-apollo-hooks',
+    //   /*
+    //   mock: true,
+    // */
+    // }],
+  ]
 });
