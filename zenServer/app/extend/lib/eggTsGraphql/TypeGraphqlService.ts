@@ -1,23 +1,23 @@
-import * as path from 'path';
-
-import { ApolloServer } from 'apollo-server-koa';
 import { Application } from 'egg';
 import { GraphQLSchema } from 'graphql';
+import path from 'path';
 import { buildSchema } from 'type-graphql';
+import { ApolloServer } from 'apollo-server-koa';
 
 export interface GraphQLConfig {
   router: string;
   graphiql: boolean;
 }
-
-export default class GraphQL {
+export default class TypeGraphql {
+  public symbol: symbol;
   private readonly app: Application;
   private graphqlSchema: GraphQLSchema;
   private config: GraphQLConfig;
 
-  constructor(app: Application) {
+  constructor(app: Application, symbol: symbol) {
     this.app = app;
     this.config = app.config.graphql;
+    this.symbol = symbol;
   }
 
   getResolvers(): [string] {
@@ -31,6 +31,12 @@ export default class GraphQL {
       this.graphqlSchema = await buildSchema({
         resolvers: this.getResolvers(),
         dateScalarMode: 'timestamp',
+        // automatically create `schema.gql` file with schema definition in project's working directory
+        emitSchemaFile: {
+          path: 'app/../schema.gql',
+          commentDescriptions: true,
+          sortedSchema: false, // by default the printed schema is sorted alphabetically
+        },
       });
     } catch (e) {
       console.trace(e);
@@ -52,6 +58,7 @@ export default class GraphQL {
       cors: false,
     });
     this.app.logger.info('graphql server init');
+
   }
 
   // async query({query, var})

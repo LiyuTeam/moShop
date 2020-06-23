@@ -7,4 +7,5 @@ export default (app: Application) => {
 
   router.get('/user', controller.user.index);
   router.get('/user/add', controller.user.addUser);
+
 };

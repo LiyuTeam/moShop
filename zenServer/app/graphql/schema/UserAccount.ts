@@ -1,11 +1,11 @@
-import { Field, ID, InterfaceType, ObjectType, Arg, Ctx, Query, Resolver } from 'type-graphql';
+import { Field, InterfaceType, ObjectType, Arg, Ctx, Query, Resolver } from 'type-graphql';
 import { IsEmail, IsPhoneNumber } from 'class-validator';
 import { UserAccountType } from '../../types/schemaType';
 import { Context } from 'egg';
 
 @InterfaceType()
-abstract class UserAccountABC implements UserAccountType {
-  @Field(() => ID, { description: '用户账户ID' })
+abstract class UserAccountAPIInterface implements UserAccountType {
+  @Field(() => String, { description: '用户账户ID' })
   uuid: string
 
   @Field({ description: '用户账户(邮箱)' })
@@ -35,17 +35,17 @@ abstract class UserAccountABC implements UserAccountType {
   updatedAt: Date;
 }
 
-@ObjectType({ implements: UserAccountABC, description: '用户账户数据结构' })
-export class UserAccount implements UserAccountABC {
-  account: string;
-  isAdmin: number;
-  password: string;
-  phone: number;
-  secretToken: string;
-  userName: string;
-  uuid: string;
-  createdAt: Date;
-  updatedAt: Date;
+@ObjectType({ implements: UserAccountAPIInterface, description: '用户账户数据结构' })
+export class UserAccount implements UserAccountAPIInterface {
+  @Field() account: string;
+  @Field() isAdmin: number;
+  @Field() password: string;
+  @Field() phone: number;
+  @Field() secretToken: string;
+  @Field() userName: string;
+  @Field() uuid: string;
+  @Field() createdAt: Date;
+  @Field() updatedAt: Date;
 }
 
 
@@ -57,7 +57,7 @@ export class UserAccountResolver {
     @Ctx() ctx: Context,
       @Arg('account', { nullable: true }) account?: string,
   ): Promise<any> {
-    return [ await ctx.service.user.getUser({ account }) ];
+    return await ctx.service.user.getUser({ account });
   }
 
   @Query(() => [ UserAccount ])
@@ -75,4 +75,13 @@ export class UserAccountResolver {
   ) {
     return await ctx.service.user.loginUser({ account, password });
   }
+
+  @Query(() => UserAccount)
+  async userAccount(
+  @Ctx() ctx: Context,
+  ) {
+    const res = await this.listUser(ctx);
+    return res[0];
+  }
+
 }

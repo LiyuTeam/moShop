@@ -19,10 +19,12 @@
     "ci": "npm run lint && npm run cov && npm run tsc",
     "autod": "autod",
     "lint": "eslint . --ext .ts",
-    "clean": "ets clean"
+    "clean": "ets clean",
+    "generate": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
-    "@liyu_team/egg-typescript-graphql": "^2.8.1",
+    "apollo-server-koa": "^2.14.3",
+    "class-validator": "^0.12.2",
     "data-forge": "^1.8.9",
     "dataloader": "^2.0.0",
     "egg": "^2.6.1",
@@ -37,10 +39,16 @@
     "tcb-admin-node": "^1.23.0",
     "type-graphql": "^1.0.0-rc.2",
     "typeorm": "^0.2.25",
-    "class-validator": "^0.12.2",
-    "apollo-server-koa": "^2.14.3"
+    "vue-property-decorator": "^8.4.2"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.15.3",
+    "@graphql-codegen/introspection": "1.15.3",
+    "@graphql-codegen/typescript": "1.15.3",
+    "@graphql-codegen/typescript-document-nodes": "1.15.3",
+    "@graphql-codegen/typescript-mongodb": "1.15.3",
+    "@graphql-codegen/typescript-resolvers": "1.15.3",
+    "@graphql-codegen/typescript-type-graphql": "^1.15.3",
     "@types/mocha": "^2.2.40",
     "@types/node": "^14.0.6",
     "@types/supertest": "^2.0.0",
