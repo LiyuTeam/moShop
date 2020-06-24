@@ -69,14 +69,14 @@ export default defineConfig({
       component: './ListTableList',
     },
     {
-      path: '/',
-      redirect: '/welcome',
-    },
-    {
-      name: '个人设置',
-      icon: 'smile',
+      name: 'modules.title',
+      icon: 'apartment',
       path: '/modules',
       component: './Modules',
+    },
+    {
+      path: '/',
+      redirect: '/welcome',
     },
     {
       component: './404',

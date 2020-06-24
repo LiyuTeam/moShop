@@ -3,6 +3,7 @@ export default {
   'modules.menuMap.security': '安全设置',
   'modules.menuMap.binding': '账号绑定',
   'modules.menuMap.notification': '新消息通知',
+  'modules.menuMap.units': '单元块',
   'modules.basic.avatar': '头像',
   'modules.basic.change-avatar': '更换头像',
   'modules.basic.email': '邮箱',
@@ -53,4 +54,6 @@ export default {
   'modules.notification.todo-description': '待办任务将以站内信的形式通知',
   'modules.settings.open': '开',
   'modules.settings.close': '关',
+  'modules.units.title':'单元块'
+
 };

@@ -3,6 +3,7 @@ export default {
   'modules.menuMap.security': 'Security Settings',
   'modules.menuMap.binding': 'Account Binding',
   'modules.menuMap.notification': 'New Message Notification',
+  'modules.menuMap.units': 'Units',
   'modules.basic.avatar': 'Avatar',
   'modules.basic.change-avatar': 'Change avatar',
   'modules.basic.email': 'Email',
@@ -58,4 +59,5 @@ export default {
     'The to-do list will be notified in the form of a letter from the station',
   'modules.settings.open': 'Open',
   'modules.settings.close': 'Close',
+  'modules.units.title':'Units'
 };

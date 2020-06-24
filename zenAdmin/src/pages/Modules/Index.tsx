@@ -1,19 +1,20 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-import {FormattedMessage, Dispatch, connect} from 'umi';
-import {GridContent} from '@ant-design/pro-layout';
-import {Menu} from 'antd';
+import { FormattedMessage, Dispatch, connect } from 'umi';
+import { GridContent } from '@ant-design/pro-layout';
+import { Button, Col, Menu, Row, Space } from 'antd';
 import BaseView from './components/base';
 import BindingView from './components/binding';
-import {CurrentUser} from './data.d';
+import { CurrentUser } from './data.d';
 import NotificationView from './components/notification';
 import SecurityView from './components/security';
-import UnitsView from "./components/UnitsView";
-import DevToolView from "./components/DevToolView";
+import UnitsView from './components/UnitsView';
+import DevToolView from './components/DevToolView';
 
 import styles from './style.less';
+import { SettingOutlined } from '@ant-design/icons/lib';
 
-const {Item} = Menu;
+const { Item } = Menu;
 
 interface ModulesProps {
   dispatch: Dispatch;
@@ -37,7 +38,7 @@ class Modules extends Component<ModulesProps,
   constructor(props: ModulesProps) {
     super(props);
     const menuMap = {
-      devtool: <FormattedMessage id="modules.menuMap.devtool" defaultMessage="DevTool" />,
+      devtool: <FormattedMessage id="modules.menuMap.devtool" defaultMessage="DevTool"/>,
       units: <FormattedMessage id="modules.menuMap.units" defaultMessage="Units"/>,
       base: <FormattedMessage id="modules.menuMap.basic" defaultMessage="Basic Settings"/>,
       security: (
@@ -61,7 +62,7 @@ class Modules extends Component<ModulesProps,
   }
 
   componentDidMount() {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch({
       type: 'modules/fetchCurrent',
     });
@@ -74,12 +75,12 @@ class Modules extends Component<ModulesProps,
   }
 
   getMenu = () => {
-    const {menuMap} = this.state;
+    const { menuMap } = this.state;
     return Object.keys(menuMap).map((item) => <Item key={item}>{menuMap[item]}</Item>);
   };
 
   getRightTitle = () => {
-    const {selectKey, menuMap} = this.state;
+    const { selectKey, menuMap } = this.state;
     return menuMap[selectKey];
   };
 
@@ -98,7 +99,7 @@ class Modules extends Component<ModulesProps,
         return;
       }
       let mode: 'inline' | 'horizontal' = 'inline';
-      const {offsetWidth} = this.main;
+      const { offsetWidth } = this.main;
       if (this.main.offsetWidth < 641 && offsetWidth > 400) {
         mode = 'horizontal';
       }
@@ -112,7 +113,7 @@ class Modules extends Component<ModulesProps,
   };
 
   renderChildren = () => {
-    const {selectKey} = this.state;
+    const { selectKey } = this.state;
     if (selectKey === 'base') {
       return <BaseView/>;
     }
@@ -128,20 +129,19 @@ class Modules extends Component<ModulesProps,
     if (selectKey === 'units') {
       return <UnitsView/>;
     }
-    if(selectKey ==='devtool'){
+    if (selectKey === 'devtool') {
       return <DevToolView/>;
     }
-
 
     return null;
   };
 
   render() {
-    const {currentUser} = this.props;
+    const { currentUser } = this.props;
     if (!currentUser.userid) {
       return '';
     }
-    const {mode, selectKey} = this.state;
+    const { mode, selectKey } = this.state;
     return (
       <GridContent>
         <div
@@ -153,10 +153,19 @@ class Modules extends Component<ModulesProps,
           }}
         >
           <div className={styles.leftMenu}>
+            <Row>
+              <Col flex='2em'/>
+              <Col flex='auto'>
+                <Button
+                  type="dashed"
+                  shape="circle"
+                  icon={<SettingOutlined/>}/>
+              </Col>
+            </Row>
             <Menu
               mode={mode}
               selectedKeys={[selectKey]}
-              onClick={({key}) => this.selectKey(key as ModulesStateKeys)}
+              onClick={({ key }) => this.selectKey(key as ModulesStateKeys)}
             >
               {this.getMenu()}
             </Menu>
@@ -171,8 +180,9 @@ class Modules extends Component<ModulesProps,
   }
 }
 
+
 export default connect(
-  ({modules}: { modules: { currentUser: CurrentUser } }) => ({
+  ({ modules }: { modules: { currentUser: CurrentUser } }) => ({
     currentUser: modules.currentUser,
   }),
 )(Modules);
