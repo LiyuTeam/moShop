@@ -40,6 +40,7 @@ export function autoEntities(ctx: Context): Map<any, any> {
       for (const name of clients.keys()) {
         const client: ConnectionOptions = clients.get(name);
 
+
         // 迭代client配置,遍历entity文件
         client.entities?.forEach(p => {
           const entitiesFiles = walkPath.walkFiles(path.join(app.baseDir, path.dirname(p.toString())).replace(/[\\]\*.*/, ''), 'ts');
@@ -51,6 +52,7 @@ export function autoEntities(ctx: Context): Map<any, any> {
               //  entity以[client名字#entity名字]的KV形式挂载到ctx的autoEntities<Map>中
               const EntityName = path.basename(entity).split('.')[0].toLowerCase();
               const ConnName = [ name.toLowerCase(), EntityName ].join('#');
+              ctx.logger.info('cur client is ', name,ConnName);
               classes.set(ConnName, Entity);
               ctx.logger.debug('autoEntities get %s entity key is %s , from %s', EntityName, ConnName, entityPath);
             }

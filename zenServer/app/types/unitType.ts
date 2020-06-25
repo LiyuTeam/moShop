@@ -1,21 +1,22 @@
-import { Field, ID } from 'type-graphql';
+import { Column, CreateDateColumn, Generated, ObjectID, ObjectIdColumn,
+  UpdateDateColumn } from 'typeorm';
 
-export interface MongodbEntityType {
-  _id: string;
+
+interface EntityIMPL {
+  _id?: any;
+  id?: any;
+  uid: string;
+  created_at: Date;
+  updated_at: Date;
+  status: number;
 }
 
-export class MongodbEntity implements MongodbEntityType {
-  @Field(() => ID, { nullable: true, description: 'Mongodb主键_id' })
-  public _id: string;
+export class MongodbEntity implements EntityIMPL {
 
-}
-
-export interface SQLEntityType {
-  id: number;
-}
-
-export class SQLEntity implements SQLEntityType {
-  @Field(() => ID, { nullable: true, description: 'SQL关系型数据库主键id' })
-  public id: number;
+  @ObjectIdColumn() _id: ObjectID;
+  @Column() status: number;
+  @Generated('uuid') @Column() uid: string;
+  @CreateDateColumn() created_at: Date;
+  @UpdateDateColumn() updated_at: Date;
 
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from '@@/plugin-dva/exports';
 import { CurrentUser } from '@/pages/Modules/data';
-import { Button, Drawer, Form, Space, Radio } from 'antd';
+import { Button, Drawer, Form, Space, Radio, Input } from 'antd';
 import { AlignCenterOutlined, FileImageOutlined } from '@ant-design/icons/lib';
 import apolloClient from '@/libs/apollo-graphql';
 import { useQuery } from '@apollo/react-hooks';
@@ -57,7 +57,7 @@ const QueryRates = () => {
   return data.rates.map(({ currency, rate }) => (
     <div key={currency}>
       <p>
-        {currency}: {rate}
+        {currency}:<Input placeholder="Basic usage" value={rate} />
       </p>
     </div>
   ));

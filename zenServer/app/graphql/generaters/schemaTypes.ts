@@ -70,7 +70,6 @@ export type QueryLoginUserArgs = {
 };
 
 
-
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
 
@@ -267,7 +266,7 @@ export abstract class UserAccountApiInterface {
 
   @TypeGraphQL.Field(type => any)
   updatedAt!: Scalars['Timestamp'];
-};
+}
 
 /** 用户账户数据结构 */
 @TypeGraphQL.ObjectType({ implements: UserAccountApiInterface })
@@ -300,7 +299,7 @@ export class UserAccount extends UserAccountApiInterface {
 
   @TypeGraphQL.Field(type => any)
   updatedAt!: Scalars['Timestamp'];
-};
+}
 
 
 export class Query {
@@ -309,7 +308,7 @@ export class Query {
   @TypeGraphQL.Field(type => UserAccount)
   getUser!: FixDecorator<UserAccount>;
 
-  @TypeGraphQL.Field(type => [UserAccount])
+  @TypeGraphQL.Field(type => [ UserAccount ])
   listUser!: Array<UserAccount>;
 
   @TypeGraphQL.Field(type => Boolean)
@@ -317,7 +316,7 @@ export class Query {
 
   @TypeGraphQL.Field(type => UserAccount)
   userAccount!: FixDecorator<UserAccount>;
-};
+}
 
 
 @TypeGraphQL.ArgsType()
@@ -325,7 +324,7 @@ export class QueryGetUserArgs {
 
   @TypeGraphQL.Field(type => String, { nullable: true })
   account!: Maybe<Scalars['String']>;
-};
+}
 
 
 @TypeGraphQL.ArgsType()
@@ -336,4 +335,4 @@ export class QueryLoginUserArgs {
 
   @TypeGraphQL.Field(type => String)
   account!: Scalars['String'];
-};
+}

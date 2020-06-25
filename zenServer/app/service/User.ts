@@ -1,6 +1,7 @@
 import { Service } from 'egg';
 import { v4 as uuid } from 'uuid';
 import { UserAccountType } from '../types/schemaType';
+import { getRepository } from 'typeorm';
 
 /**
  * User Service
@@ -32,7 +33,11 @@ export default class User extends Service {
   public async listUser(props?: any) {
     const { ctx } = this;
     ctx.logger.info('props', props);
-    return await ctx.repo.UserAccount.find();
+    const UserEntity = await ctx.autoEntities.get('default#userAccount'),
+      UserRepo = getRepository(UserEntity);
+
+    return UserRepo.findOne();
+
   }
 
   public async loginUser(props: { account?: string; password?: string }) {

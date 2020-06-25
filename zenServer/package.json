@@ -33,6 +33,7 @@
     "egg-ts-typeorm": "^1.1.12",
     "graphql": "^15.1.0",
     "lodash": "^4.17.15",
+    "mongodb": "^3.5.9",
     "reflect-metadata": "^0.1.13",
     "seneca": "^3.21.2",
     "sqlite3": "^4.2.0",

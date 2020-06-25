@@ -8,6 +8,7 @@ export interface GraphQLConfig {
   router: string;
   graphiql: boolean;
 }
+
 export default class TypeGraphql {
   public symbol: symbol;
   private readonly app: Application;
@@ -33,7 +34,8 @@ export default class TypeGraphql {
         dateScalarMode: 'timestamp',
         // automatically create `schema.gql` file with schema definition in project's working directory
         emitSchemaFile: {
-          path: 'app/../schema.gql',
+          // path: 'app/../schema.gql',
+          path: path.join('app', 'public', 'graphql', 'AllSchema.graphql'),
           commentDescriptions: true,
           sortedSchema: false, // by default the printed schema is sorted alphabetically
         },
