@@ -1,14 +1,17 @@
 import "taro-ui/dist/style/components/avatar.scss";
 import { ComponentType } from "react";
 import Taro, { Component, Config } from "@tarojs/taro";
-import { View } from "@tarojs/components";
+import { View, ScrollView  } from "@tarojs/components";
+
+import Profile from './profile'
+import Menu from './menu'
+import { dispatchCartNum } from '@actions/cart'
+import { getWindowHeight } from "@utils/style"
+
 
 import { AtAvatar, AtNavBar } from "taro-ui";
-
 import { observer, inject } from "@tarojs/mobx";
-
 import UserForm from "../../components/userForm/UserForm";
-
 import TabBar from "../../components/tabBar/TabBar";
 
 import "./user.styl";
@@ -19,6 +22,7 @@ type PageStateProps = {
     increment: Function
     decrement: Function
     incrementAsync: Function
+    userInfo: object
   }
 };
 
@@ -37,8 +41,14 @@ class User extends Component {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
-    navigationBarTitleText: "用户",
+    navigationBarTitleText: '个人中心'
   };
+
+  handleLogin = () => {
+    Taro.navigateTo({
+      url: '/pages/user-login/user-login'
+    })
+  }
 
   componentWillMount() {}
 
@@ -72,44 +82,35 @@ class User extends Component {
     console.log("handleEdit");
   };
   render() {
-    const {
-      counterStore: { counter },
-    } = this.props;
-    console.log(counter);
     const userData = [
       { label: "Name", field: "name", value: "凯文" },
       { label: "Nick Name", field: "nickname", value: "777" },
       { label: "Email", field: "email", value: "kevincn.tang@outlook.com" },
       { label: "Phone", field: "phone", value: "15011760892" },
     ];
+    const { userInfo } = this.props
     console.log(userData);
     return (
       <View className='user'>
-        <AtNavBar
-          onClickRgIconSt={this.handleEdit}
-          color='#000'
-          rightFirstIconType='user'
+        <ScrollView
+          scrollY
+          className='user__wrap'
+          style={{ height: getWindowHeight() }}
         >
-          <View>我的</View>
-        </AtNavBar>
-        {/*<UserForm userData={userData} />*/}
-        <View className='header'>
-          <AtAvatar
-            className='head_portrait'
-            circle
-            size='large'
-            text='我的头像'
-            image='https://jdc.jd.com/img/200'
-          />
-          <View className='name'>凯文</View>
-          <View className='vip'>钻石会员</View>
-          <View className='phone'>15077777777</View>
-
-          <View className='info'></View>
+          <Profile userInfo={userInfo} />
+          <Menu />
+          {userInfo.login &&
+          <View className='user__logout' onClick={this.handleLogin}>
+            <Text>切换账号</Text>
+          </View>
+          }
+          <View className='user__empty' />
+        </ScrollView>
+        <View className='user__activity'>
+          <Activity />
         </View>
-        <TabBar tabBarStore={[]} currentPage={4} />
       </View>
-    );
+    )
   }
 }
 
