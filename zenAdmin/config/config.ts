@@ -1,9 +1,8 @@
 // https://umijs.org/config/
-import {defineConfig} from 'umi';
+import { defineConfig } from 'umi';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
-
-const {REACT_APP_ENV} = process.env;
+const { REACT_APP_ENV } = process.env;
 export default defineConfig({
   hash: true,
   antd: {},
@@ -79,6 +78,12 @@ export default defineConfig({
       redirect: '/welcome',
     },
     {
+      name: 'wxapp.title',
+      icon: 'smile',
+      path: '/wxapp',
+      component: './Wxapp',
+    },
+    {
       component: './404',
     },
   ],
@@ -112,5 +117,5 @@ export default defineConfig({
     //   mock: true,
     // */
     // }],
-  ]
+  ],
 });

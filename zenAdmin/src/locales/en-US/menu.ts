@@ -50,4 +50,5 @@ export default {
   'menu.editor.mind': 'Mind Editor',
   'menu.editor.koni': 'Koni Editor',
   'menu.modules.title':'Modules Settings',
+  'menu.wxapp.title':'WxApp',
 };
