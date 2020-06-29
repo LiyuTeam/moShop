@@ -1,3 +1,4 @@
+const path = require('path') // eslint-disable-line
 const {TARO_APP_TYPE, TARO_APP_API, NODE_ENV} = process.env
 const outputRoot = `dist/${NODE_ENV === 'development' ? 'tmp' : 'build'}-${TARO_APP_TYPE}-${TARO_APP_API}`
 const config = {
@@ -5,6 +6,12 @@ const config = {
   env: {
     TARO_APP_TYPE: '"' + TARO_APP_TYPE + '"',
     TARO_APP_API: '"' + TARO_APP_API + '"'
+  },
+
+  alias: {
+    '@components': path.resolve(__dirname, '..', 'src/components'),
+    '@utils': path.resolve(__dirname, '..', 'src/utils'),
+    '@styles': path.resolve(__dirname, '..', 'src/styles')
   },
   date: '2020-5-26',
   designWidth: 750,
