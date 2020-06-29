@@ -14,10 +14,10 @@ export default {
   {
     type: 'mongodb',
     name: 'mongodb',
-    host: '192.168.1.88',
+    host: '203.195.148.136',
     port: 30100,
     username: 'admin',
-    password: '123456',
+    password: 'liyu123456!',
     authSource: 'admin',
     database: 'zenServer',
     entities: [ 'app/entities/mongodb/**/*.{ts,js}' ],

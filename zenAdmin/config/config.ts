@@ -2,7 +2,6 @@
 import { defineConfig } from 'umi';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
-
 const { REACT_APP_ENV } = process.env;
 export default defineConfig({
   hash: true,
@@ -84,6 +83,21 @@ export default defineConfig({
       path: '/wxapp',
       component: './Wxapp',
     },
+
+    {
+      name: 'configuration.title',
+      icon: '',
+      path: '/configuration',
+      component: './Configuration',
+      routes:[
+        {
+          name: 'configuration.formConfigs.title',
+          icon: 'smile',
+          path: '/configuration/formconfigs',
+          component: './Configuration/FormConfigs',
+        },
+      ]
+    },
     {
       component: './404',
     },
@@ -99,8 +113,7 @@ export default defineConfig({
   proxy: proxy[REACT_APP_ENV || 'dev'],
   manifest: {
     basePath: '/',
-  },
-  // plugins: [
+  }, // plugins: [
   //   'umi-plugin-react',
   //   'umi-plugin-apollo',
   // ],

@@ -153,15 +153,6 @@ class Modules extends Component<ModulesProps,
           }}
         >
           <div className={styles.leftMenu}>
-            <Row>
-              <Col flex='2em'/>
-              <Col flex='auto'>
-                <Button
-                  type="dashed"
-                  shape="circle"
-                  icon={<SettingOutlined/>}/>
-              </Col>
-            </Row>
             <Menu
               mode={mode}
               selectedKeys={[selectKey]}

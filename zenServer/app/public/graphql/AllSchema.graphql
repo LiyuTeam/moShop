@@ -3,6 +3,35 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+# 表单文本字段
+type FormFieldTextConfig {
+  key: String!
+  title: String!
+  type: String!
+  value: String!
+}
+
+# 前端wxapp表单区块
+type FormConfig {
+  key: String!
+  name: String!
+  cloumns: [FormFieldTextConfig!]!
+}
+
+# 前端页面模块
+type PageConfig {
+  key: String!
+  name: String!
+  pageType: String!
+  title: String!
+  forms: [FormConfig!]!
+}
+
+# 前端配置接口
+type FrontEndConfig {
+  pages: [PageConfig!]!
+}
+
 # 用户账户数据结构
 type UserAccount implements UserAccountAPIInterface {
   uuid: String!
@@ -49,6 +78,8 @@ interface UserAccountAPIInterface {
 }
 
 type Query {
+  getPage(pageKey: String): [PageConfig!]!
+  getFormByPage(formKey: String): [FormConfig!]!
   getUser(account: String): UserAccount!
   listUser: [UserAccount!]!
   loginUser(password: String!, account: String!): Boolean!
