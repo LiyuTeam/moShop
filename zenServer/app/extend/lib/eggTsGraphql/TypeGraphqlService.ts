@@ -57,7 +57,7 @@ export default class TypeGraphql {
     server.applyMiddleware({
       app: this.app,
       path: this.config.router,
-      cors: false,
+      cors: true,
     });
     this.app.logger.info('graphql server init');
 

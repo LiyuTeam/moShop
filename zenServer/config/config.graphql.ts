@@ -4,7 +4,7 @@ export default {
   // 是否加载到 app 上，默认开启
   app: true,
   // 是否加载到 agent 上，默认关闭
-  agent: false,
+  agent: true,
   // 是否加载开发者工具 graphiql, 默认开启。路由同 router 字段。使用浏览器打开该可见。
   graphiql: true,
   // 是否设置默认的Query和Mutation, 默认关闭
@@ -16,22 +16,26 @@ export default {
   // * onPreGraphiQL(ctx) {
   // },
   // apollo server的透传参数，参考[文档](https://www.apollographql.com/docs/apollo-server/api/apollo-server/#parameters)
-  // apolloServerOptions: {
-  //   rootValue,
-  //   formatError,
-  //   formatResponse,
-  //   mocks,
-  //   schemaDirectives,
-  //   introspection,
-  //   playground,
-  //   debug,
-  //   validationRules,
-  //   tracing,
-  //   cacheControl,
-  //   subscriptions,
-  //   engine,
-  //   persistedQueries,
-  //   cors,
-  // },
-};
+  apolloServerOptions: {
+    //   rootValue,
+    //   formatError,
+    //   formatResponse,
+    //   mocks,
+    //   schemaDirectives,
+    //   introspection,
+    //   playground,
+    //   debug,
+    //   validationRules,
+    //   tracing,
+    //   cacheControl,
+    //   subscriptions,
+    //   engine,
+    //   persistedQueries,
+  },
+  cors: {
+    origin: '*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
+  },
+}
+;
 
