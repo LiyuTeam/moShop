@@ -1,18 +1,34 @@
 import React from 'react';
 import TabsBasicLayout from './TabsBasicLayout';
-import Settings from './Settings';
+import SettingPage from './components/Setting';
+import { Layout } from 'antd';
+import './index.less';
+import { getClassnames } from '@/utils/utils';
 
-const menuMap = new Map();
-menuMap.set('setting', {
-  title: 'wxapp-setting',
-  component: Settings()
-});
+const PageSymbol = Symbol('wxapp'),
+  menuMap = [
+    {
+      key: 'wxapp-setting',
+      title: 'wxapp.menu.setting',
+      component: SettingPage,
+    },
+    // {
+    //   key: 'wxapp-navigate',
+    //   title: 'wxapp.menu.navigate',
+    // },
+  ];
 
-const WxappPages: React.FC<{}> = () => {
+const WxappPages = () => {
   return (
-    <>
-      <TabsBasicLayout menuMap={menuMap} />
-    </>
+    <Layout.Content
+      className={
+        getClassnames(
+          ['layout', 'content'],
+          [PageSymbol.description ?? '', 'layout', 'content'],
+        )}
+    >
+      <TabsBasicLayout menuMap={menuMap}/>
+    </Layout.Content>
   );
 };
 

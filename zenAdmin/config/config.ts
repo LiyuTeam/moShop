@@ -2,6 +2,7 @@
 import { defineConfig } from 'umi';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
+
 const { REACT_APP_ENV } = process.env;
 export default defineConfig({
   hash: true,
@@ -99,23 +100,21 @@ export default defineConfig({
   manifest: {
     basePath: '/',
   },
-  plugins: [
-    // ['umi-plugin-react', {
-    //   routes: {
-    //     exclude: [
-    //       /schema\.(js|jsx|ts|tsx)$/,
-    //       /resolvers\.(js|jsx|ts|tsx)$/,
-    //     ],
-    //   },
-    //   // other umi-plugin-react options
-    // }],
-    // ['umi-plugin-apollo', {
-    //   uri: 'https://48p1r2roz4.sse.codesandbox.io/',
-    //   // options: './',
-    //   hooksImportFrom: 'react-apollo-hooks',
-    //   /*
-    //   mock: true,
-    // */
-    // }],
-  ],
+  // plugins: [
+  //   'umi-plugin-react',
+  //   'umi-plugin-apollo',
+  // ],
+  // react: {
+  //   routes: {
+  //     exclude: [
+  //       /schema\.(js|jsx|ts|tsx)$/,
+  //       /resolvers\.(js|jsx|ts|tsx)$/,
+  //     ],
+  //   },
+  // },
+  // apollo: {
+  //   options: { path: './' },
+  //   hooksImportFrom: 'react-apollo-hooks',
+  //   mock: true,
+  // },
 });

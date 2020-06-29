@@ -1,32 +1,44 @@
-import React from "react";
-import styles from "./index.less";
-import {Tabs} from "antd";
+import React, { useEffect } from 'react';
+import styles from './index.less';
+import { Tabs } from 'antd';
+import { useIntl, history } from 'umi';
 
-const {TabPane} = Tabs;
-
-function callback(key) {
-  console.log(key);
-}
+const { TabPane } = Tabs;
 
 export default (props: {
-  menuMap?: Map<any, any>
+  menuMap?: { key: string, title?: string, component?: any }[]
 }) => {
-  const {menuMap} = props;
-  console.log(props.menuMap)
+  const { menuMap } = props,
+    intl = useIntl(),
+    fm = (str: string) => intl.formatMessage({ id: str });
+
+  useEffect(() => {
+    if (!history.location.hash) {
+      history.push(
+        Object.assign({}, history.location, {
+          hash:
+          props.menuMap[0].key,
+        }),
+      );
+    }
+  }, []);
+
   return (
     <div className={styles.container}>
-      <div id="components-tabs-demo-basic">
-        <Tabs defaultActiveKey="1" onChange={callback} tabPosition='left'>
-          <div>
-            {[menuMap?.forEach((
-              v: { title?: string, component?: any },k
-              ) => (
-                <TabPane tab={`Tab${v?.title}`} key={k}>{v?.component}</TabPane>
-              )
-            )]}
-          </div>
-        </Tabs>
-      </div>
+      <p>{history.location.hash}</p>
+      <Tabs
+        onChange={key => history.push(Object.assign({}, history.location, { hash: key }))}
+        tabPosition='left'>
+        {menuMap?.map(menu => {
+            return (
+              <TabPane
+                tab={fm(menu.title ?? '')}
+                key={menu.key}
+              >{menu?.component() ?? ''}</TabPane>
+            );
+          },
+        )}
+      </Tabs>
     </div>
   );
 };

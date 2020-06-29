@@ -1,4 +1,4 @@
-{
+export default {
   "110000": [
     {
       "province": "北京市",

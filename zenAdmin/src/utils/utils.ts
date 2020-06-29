@@ -22,3 +22,5 @@ export const isAntDesignProOrDev = (): boolean => {
 };
 
 export const getPageQuery = () => parse(window.location.href.split('?')[1]);
+
+export const getClassnames = (...names: string[][]) => names.map(sub => sub.join('-')).join(' ');

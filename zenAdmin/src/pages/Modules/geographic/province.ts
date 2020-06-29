@@ -1,4 +1,4 @@
-[
+export default [
   {
     "name": "北京市",
     "id": "110000"
