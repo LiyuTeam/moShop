@@ -1,8 +1,12 @@
 import { Application } from 'egg';
-const extendSymbol = Symbol('eggTsTypeorm');
+import TypeOrmService from './TypeOrmService';
+const SYMBOL_EGG_TYPEORM = Symbol('eggTsTypeorm');
 
 export default {
-  application: (app: Application, props: any) => {
-    console.log('graphql log', extendSymbol, props, app);
+  appliction(app: Application): TypeOrmService {
+    if (!this[SYMBOL_EGG_TYPEORM]) {
+      this[SYMBOL_EGG_TYPEORM] = new TypeOrmService(app, SYMBOL_EGG_TYPEORM);
+    }
+    return this[SYMBOL_EGG_TYPEORM];
   },
 };

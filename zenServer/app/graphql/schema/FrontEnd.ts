@@ -60,9 +60,9 @@ export class FrontEndConfig implements FrontEndIMPL {
 export class PageConfigResovler {
   @Query(() => [ PageConfig ])
   async getPage(
-    @Ctx() ctx: Context,
-      @Arg('pageKey', { nullable: true }) pageKey?: string,
-  ): Promise<any> {
+  @Ctx() ctx: Context,
+    @Arg('pageKey', { nullable: true }) pageKey?: string,
+  ) {
     ctx.logger.debug('getPage query has been called');
     return [
       {

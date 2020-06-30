@@ -1,10 +1,9 @@
 import { Field, InterfaceType, ObjectType, Arg, Ctx, Query, Resolver } from 'type-graphql';
 import { IsEmail, IsPhoneNumber } from 'class-validator';
-import { UserAccountType } from '../../types/schemaType';
 import { Context } from 'egg';
 
 @InterfaceType()
-abstract class UserAccountAPIInterface implements UserAccountType {
+abstract class UserAccountAPIInterface implements UserAccountEntityType {
   @Field(() => String, { description: '用户账户ID' })
   uuid: string
 

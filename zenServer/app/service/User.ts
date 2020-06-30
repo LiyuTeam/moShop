@@ -1,6 +1,5 @@
 import { Service } from 'egg';
 import { v4 as uuid } from 'uuid';
-import { UserAccountType } from '../types/schemaType';
 import { getRepository } from 'typeorm';
 
 /**
@@ -43,7 +42,7 @@ export default class User extends Service {
   public async loginUser(props: { account?: string; password?: string }) {
     const { ctx } = this;
     ctx.logger.info('props', props);
-    const loginUser: any|UserAccountType = await ctx.repo.UserAccount.findOne({ account: props.account });
+    const loginUser: any|UserAccountEntityType = await ctx.repo.UserAccount.findOne({ account: props.account });
     if (loginUser && loginUser.password === props.password) {
       loginUser.isAdmin = true;
       loginUser.updatedAt = new Date();

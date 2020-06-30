@@ -12,6 +12,7 @@ export default class AppBoot implements IBoot {
   async serverDidReady() {
     const { app } = this;
     await app.typeGraphql.init();
+    await app.typeOrm.init();
     app.logger.info(`${app.typeGraphql.symbol.toString()} started`);
   }
 }

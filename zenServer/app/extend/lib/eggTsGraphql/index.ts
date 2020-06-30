@@ -1,13 +1,13 @@
 import { Application } from 'egg';
 import TypeGraphql from './TypeGraphqlService';
 
-const TYPE_GRAPHQL_SYMBOL = Symbol('Application#eggTsGraphql');
+const SYMBOL_EGG_TYPE_GRAPHQL = Symbol('Application#eggTsGraphql');
 
 export default {
   application(app: Application): TypeGraphql {
-    if (!this[TYPE_GRAPHQL_SYMBOL]) {
-      this[TYPE_GRAPHQL_SYMBOL] = new TypeGraphql(app, TYPE_GRAPHQL_SYMBOL);
+    if (!this[SYMBOL_EGG_TYPE_GRAPHQL]) {
+      this[SYMBOL_EGG_TYPE_GRAPHQL] = new TypeGraphql(app, SYMBOL_EGG_TYPE_GRAPHQL);
     }
-    return this[TYPE_GRAPHQL_SYMBOL];
+    return this[SYMBOL_EGG_TYPE_GRAPHQL];
   },
 };

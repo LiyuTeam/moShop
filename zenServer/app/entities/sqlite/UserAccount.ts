@@ -1,8 +1,7 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { UserAccountType } from '../../types/schemaType';
 
-@Entity()
-class UserAccount extends BaseEntity implements UserAccountType {
+@Entity({ name: 'UserAccount' })
+class UserAccount extends BaseEntity implements UserAccountEntityType {
 
   @PrimaryGeneratedColumn('uuid')
   id: string;

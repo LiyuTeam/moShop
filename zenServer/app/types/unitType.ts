@@ -1,10 +1,10 @@
-import { Column, CreateDateColumn, Generated, ObjectID, ObjectIdColumn,
-  UpdateDateColumn } from 'typeorm';
+import {
+  Column, CreateDateColumn, Generated, ObjectID, ObjectIdColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 
 interface EntityIMPL {
-  _id?: any;
-  id?: any;
   uid: string;
   created_at: Date;
   updated_at: Date;
@@ -13,10 +13,10 @@ interface EntityIMPL {
 
 export class MongodbEntity implements EntityIMPL {
 
-  @ObjectIdColumn() _id: ObjectID;
-  @Column() status: number;
-  @Generated('uuid') @Column() uid: string;
-  @CreateDateColumn() created_at: Date;
-  @UpdateDateColumn() updated_at: Date;
-
+  @ObjectIdColumn({ comment: '_id' }) _id: ObjectID | string;
+  @Column({ comment: '状态(1可用2禁用3删除)', default: 1 }) status: number;
+  @Generated('uuid') @Column({ comment: '唯一ID(自动)' }) uid: string;
+  @CreateDateColumn({ comment: '创建日期' }) created_at: Date;
+  @UpdateDateColumn({ comment: '更新日期' }) updated_at: Date;
+  @Column({ comment: '备注', nullable: true }) comment: string;
 }
