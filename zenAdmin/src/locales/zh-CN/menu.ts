@@ -51,6 +51,8 @@ export default {
   'menu.editor.koni': '拓扑编辑器',
   'menu.modules.title':'模块化设置',
   'menu.wxapp.title':'微信小程序',
-  'menu.configuration.title':'配置中心'
+  'menu.configuration.title':'配置中心',
+  'menu.configuration.formConfigs.title':'表单配置',
+  'menu.configuration.dictionary.title':'数据字典',
 
 };

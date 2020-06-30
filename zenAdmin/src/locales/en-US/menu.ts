@@ -51,5 +51,7 @@ export default {
   'menu.editor.koni': 'Koni Editor',
   'menu.modules.title':'Modules Settings',
   'menu.wxapp.title':'WxApp',
-  'menu.configuration.title':'Config Center'
+  'menu.configuration.title':'Config Center',
+  'menu.configuration_dictionary.title':'Dictionary',
+  'menu.configuration_formConfigs.title':'Form Config'
 };

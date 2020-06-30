@@ -1,22 +1,21 @@
-import {PageContainer, PageHeaderWrapper} from '@ant-design/pro-layout';
-import React, {useState, useEffect} from 'react';
-import {Spin} from 'antd';
+import React from "react";
 import styles from './index.less';
-import {getClassnames} from "@/utils/utils";
+import DictionaryPage from "@/pages/Configuration/Dictionary";
+import {useLocation} from 'umi';
+
+const subPageMap = new Map([
+  ['default', () => <div/>],
+  ['dictionary', () => <DictionaryPage/>]
+])
 
 export default () => {
-  const [loading, setLoading] = useState<boolean>(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-  }, []);
+  // const [loading, setLoading] = useState<boolean>(true);
+  const location = useLocation();
+  const subPageKey = location.pathname.split('/').pop();
+
   return (
-    <PageContainer
-    className={getClassnames(
-      ['layout','context']
-    )}>
-      1
-    </PageContainer>
+    <>
+      {subPageMap.get(subPageKey ?? 'default')?.call(true)}
+    </>
   );
 };
