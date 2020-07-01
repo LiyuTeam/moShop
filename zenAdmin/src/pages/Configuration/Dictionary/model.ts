@@ -1,10 +1,11 @@
 import { Effect, Reducer } from 'umi';
 
-import { CardListItemDataType } from './data.d';
+import { CardListItemDataType, DictionaryPageStateType } from './data.d';
 import { queryFakeList } from './service';
 
 export interface StateType {
   list: CardListItemDataType[];
+  pageState: DictionaryPageStateType;
 }
 
 export interface ModelType {
@@ -12,9 +13,10 @@ export interface ModelType {
   state: StateType;
   effects: {
     fetch: Effect;
+    showAddForm:Effect;
   };
   reducers: {
-    queryList: Reducer<StateType>;
+    save: Reducer<StateType>;
   };
 }
 
@@ -23,24 +25,33 @@ const Model: ModelType = {
 
   state: {
     list: [],
+    pageState: {
+      addPopFormShow: false,
+    },
   },
 
   effects: {
-    *fetch({ payload }, { call, put }) {
+    * fetch({ payload }, { call, put }) {
       const response = yield call(queryFakeList, payload);
       yield put({
-        type: 'queryList',
-        payload: Array.isArray(response) ? response : [],
+        type: 'save',
+        payload: { list: Array.isArray(response) ? response : [] },
+      });
+    },
+
+    * showAddForm({ payload }, { call, put }) {
+      yield put({
+        type: 'save',
+        payload: payload,
       });
     },
   },
 
   reducers: {
-    queryList(state, action) {
-      return {
+    save(state, { payload }) {
+      return Object.assign({
         ...state,
-        list: action.payload,
-      };
+      }, payload);
     },
   },
 };

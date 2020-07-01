@@ -1,14 +1,14 @@
-import {PlusOutlined} from '@ant-design/icons';
-import {Button, Card, List, Typography} from 'antd';
-import React, {Component, useState} from 'react';
-import {PageHeaderWrapper} from '@ant-design/pro-layout';
-import {connect, Dispatch} from 'umi';
-import {StateType} from './model';
-import {CardListItemDataType} from './data.d';
+import { PlusOutlined } from '@ant-design/icons';
+import { Button, Card, List, Typography } from 'antd';
+import React, {  useState } from 'react';
+import { PageHeaderWrapper } from '@ant-design/pro-layout';
+import { connect, Dispatch } from 'umi';
+import { StateType } from './model';
+import { CardListItemDataType } from './data.d';
 import styles from './style.less';
 import AddDictionaryPopForm from './AddDictionaryPopForm';
 
-const {Paragraph} = Typography;
+const { Paragraph } = Typography;
 
 interface DictionaryProps {
   configurationAndDictionary: StateType;
@@ -22,95 +22,96 @@ interface DictionaryState {
   current?: Partial<CardListItemDataType>;
 }
 
-class Dictionary extends Component<DictionaryProps, DictionaryState> {
+const Dictionary = (props: Partial<DictionaryProps>, state: Partial<DictionaryState>) => {
 
-  addShow!: boolean;
+  const { dispatch } = props;
 
-  setAddShow:any;
+  // dispatch({
+  //   type: 'configurationAndDictionary/fetch',
+  //   payload: {
+  //     count: 8,
+  //   },
+  // });
 
-  componentDidMount() {
-    const {dispatch} = this.props;
+  const showAddPopForm = (isShow: boolean) => {
     dispatch({
-      type: 'configurationAndDictionary/fetch',
+      type: 'configurationAndDictionary/showAddForm',
       payload: {
-        count: 8,
-      },
+        pageState: { addPopFormShow: isShow },
+      } as StateType,
     });
-    const [addShow, setAddShow] = useState(false);
-    this.addShow = addShow
-    this.setAddShow = setAddShow
-  }
+  };
 
-  render() {
-    const {
-      configurationAndDictionary: {list},
-      loading,
-    } = this.props;
-    const content = (
-      <div className={styles.pageHeaderContent}>
-        <p>数据字典</p>
-      </div>
-    );
-    const nullData: Partial<CardListItemDataType> = {};
-    return (
-      <PageHeaderWrapper content={content}>
-        <div className={styles.cardList}>
-          <List<Partial<CardListItemDataType>>
-            rowKey="id"
-            loading={loading}
-            grid={{
-              gutter: 16,
-              xs: 1,
-              sm: 2,
-              md: 3,
-              lg: 3,
-              xl: 4,
-              xxl: 4,
-            }}
-            dataSource={[nullData, ...list]}
-            renderItem={item => {
-              if (item && item.id) {
-                return (
-                  <List.Item key={item.id}>
-                    <Card
-                      hoverable
-                      className={styles.card}
-                      actions={[<a key="option1">操作一</a>, <a key="option2">操作二</a>]}
-                    >
-                      <Card.Meta
-                        avatar={<img alt="" className={styles.cardAvatar} src={item.avatar}/>}
-                        title={<a>{item.title}</a>}
-                        description={
-                          <Paragraph
-                            className={styles.item}
-                            ellipsis={{
-                              rows: 3,
-                            }}
-                          >
-                            {item.description}
-                          </Paragraph>
-                        }
-                      />
-                    </Card>
-                  </List.Item>
-                );
-              }
+  const {
+    configurationAndDictionary: { list },
+    loading,
+  } = props;
+
+  const content = (
+    <div className={styles.pageHeaderContent}>
+      <p>数据字典</p>
+    </div>
+  );
+
+  const nullData: Partial<CardListItemDataType> = {};
+
+  return (
+    <PageHeaderWrapper content={content}>
+      <div className={styles.cardList}>
+        <List<Partial<CardListItemDataType>>
+          rowKey="id"
+          loading={loading}
+          grid={{
+            gutter: 16,
+            xs: 1,
+            sm: 2,
+            md: 3,
+            lg: 3,
+            xl: 4,
+            xxl: 4,
+          }}
+          dataSource={[nullData, ...list]}
+          renderItem={item => {
+            if (item && item.id) {
               return (
-                <List.Item>
-                  <Button type="dashed" className={styles.newButton}
-                          onClick={this.setAddShow(true)}>
-                    <PlusOutlined/> 新增产品
-                  </Button>
-                  <AddDictionaryPopForm isShow={this.addShow}/>
+                <List.Item key={item.id}>
+                  <Card
+                    hoverable
+                    className={styles.card}
+                    actions={[<a key="option1">操作一</a>, <a key="option2">操作二</a>]}
+                  >
+                    <Card.Meta
+                      avatar={<img alt="" className={styles.cardAvatar} src={item.avatar}/>}
+                      title={<a>{item.title}</a>}
+                      description={
+                        <Paragraph
+                          className={styles.item}
+                          ellipsis={{
+                            rows: 3,
+                          }}
+                        >
+                          {item.description}
+                        </Paragraph>
+                      }
+                    />
+                  </Card>
                 </List.Item>
               );
-            }}
-          />
-        </div>
-      </PageHeaderWrapper>
-    );
-  }
-}
+            }
+          }}
+        >
+          <List.Item>
+            <Button type="dashed" className={styles.newButton}
+                    onClick={showAddPopForm(true)}>
+              <PlusOutlined/> 新增产品
+            </Button>
+            <AddDictionaryPopForm />
+          </List.Item>
+        </List>
+      </div>
+    </PageHeaderWrapper>
+  );
+};
 
 export default connect(
   ({
@@ -126,5 +127,5 @@ export default connect(
   }) => ({
     configurationAndDictionary,
     loading: loading.models.configurationAndDictionary,
-  })
+  }),
 )(Dictionary);

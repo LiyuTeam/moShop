@@ -1,6 +1,8 @@
-import styles from "./index.less";
-import React, {useEffect, useState} from "react";
-import {Button, Modal, Form, Input, Radio} from "antd";
+import styles from './index.less';
+import React, { useState } from 'react';
+import { Button, Modal, Form, Input, Radio } from 'antd';
+import { connect } from '@@/plugin-dva/exports';
+import { StateType } from '@/pages/Configuration/Dictionary/model';
 
 interface Values {
   title: string;
@@ -35,7 +37,7 @@ const CollectionCreateForm: React.FC<CollectionCreateFormProps> = ({
             onCreate(values);
           })
           .catch((info) => {
-            console.log("Validate Failed:", info);
+            console.log('Validate Failed:', info);
           });
       }}
     >
@@ -43,7 +45,7 @@ const CollectionCreateForm: React.FC<CollectionCreateFormProps> = ({
         form={form}
         layout="vertical"
         name="form_in_modal"
-        initialValues={{modifier: "public"}}
+        initialValues={{ modifier: 'public' }}
       >
         <Form.Item
           name="title"
@@ -51,7 +53,7 @@ const CollectionCreateForm: React.FC<CollectionCreateFormProps> = ({
           rules={[
             {
               required: true,
-              message: "Please input the title of collection!",
+              message: 'Please input the title of collection!',
             },
           ]}
         >
@@ -74,16 +76,16 @@ const CollectionCreateForm: React.FC<CollectionCreateFormProps> = ({
   );
 };
 
-export default (props: { isShow: boolean }) => {
+interface AddDictionaryPopFormPropsType {
+  isShow: boolean
+}
+
+const AddDictionaryPopForm = (props: AddDictionaryPopFormPropsType) => {
 
   const [visible, setVisible] = useState(props.isShow);
-  useEffect(()=>{
-    setVisible(props.isShow)
-  },[])
-
 
   const onCreate = (values) => {
-    console.log("Received values of form: ", values);
+    console.log('Received values of form: ', values);
     setVisible(false);
   };
   return (
@@ -110,3 +112,9 @@ export default (props: { isShow: boolean }) => {
     </div>
   );
 };
+
+export default connect(
+  ({ configurationAndDictionary, isShow }: { configurationAndDictionary: StateType, isShow: boolean }) => ({
+    configurationAndDictionary, isShow,
+  }),
+)(AddDictionaryPopForm);

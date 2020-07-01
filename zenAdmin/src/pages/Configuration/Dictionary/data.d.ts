@@ -27,3 +27,9 @@ export interface CardListItemDataType {
   content: string;
   members: Member[];
 }
+
+export interface DictionaryPageStateType {
+  addPopFormShow: boolean;
+}
+
+
