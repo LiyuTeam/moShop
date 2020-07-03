@@ -1,13 +1,12 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Card, List, Typography } from 'antd';
-import React, {  useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { connect, Dispatch } from 'umi';
 import { StateType } from './model';
 import { CardListItemDataType } from './data.d';
 import styles from './style.less';
 import AddDictionaryPopForm from './AddDictionaryPopForm';
-
 const { Paragraph } = Typography;
 
 interface DictionaryProps {
@@ -24,16 +23,10 @@ interface DictionaryState {
 
 const Dictionary = (props: Partial<DictionaryProps>, state: Partial<DictionaryState>) => {
 
-  const { dispatch } = props;
+  const
+    { dispatch, } = props;
 
-  // dispatch({
-  //   type: 'configurationAndDictionary/fetch',
-  //   payload: {
-  //     count: 8,
-  //   },
-  // });
-
-  const showAddPopForm = (isShow: boolean) => {
+  let showAddPopForm = (isShow: boolean) => {
     dispatch({
       type: 'configurationAndDictionary/showAddForm',
       payload: {
@@ -102,10 +95,10 @@ const Dictionary = (props: Partial<DictionaryProps>, state: Partial<DictionarySt
         >
           <List.Item>
             <Button type="dashed" className={styles.newButton}
-                    onClick={showAddPopForm(true)}>
+                    onClick={e => showAddPopForm(true)}>
               <PlusOutlined/> 新增产品
             </Button>
-            <AddDictionaryPopForm />
+            <AddDictionaryPopForm/>
           </List.Item>
         </List>
       </div>

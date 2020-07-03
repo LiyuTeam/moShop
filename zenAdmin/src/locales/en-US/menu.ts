@@ -52,6 +52,6 @@ export default {
   'menu.modules.title':'Modules Settings',
   'menu.wxapp.title':'WxApp',
   'menu.configuration.title':'Config Center',
-  'menu.configuration_dictionary.title':'Dictionary',
-  'menu.configuration_formConfigs.title':'Form Config'
+  'menu.configuration.title.configuration.dictionary.title':'Dictionary',
+  'menu.configuration.title.configuration.formConfigs.title':'Form Config'
 };

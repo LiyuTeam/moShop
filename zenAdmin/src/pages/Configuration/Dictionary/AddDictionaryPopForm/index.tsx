@@ -1,8 +1,9 @@
 import styles from './index.less';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Modal, Form, Input, Radio } from 'antd';
-import { connect } from '@@/plugin-dva/exports';
-import { StateType } from '@/pages/Configuration/Dictionary/model';
+import { connect, useDispatch, useSelector } from '@@/plugin-dva/exports';
+import { DictionaryDVAType, StateType } from '@/pages/Configuration/Dictionary/model';
+import { Dispatch } from '@@/plugin-dva/connect';
 
 interface Values {
   title: string;
@@ -76,17 +77,28 @@ const CollectionCreateForm: React.FC<CollectionCreateFormProps> = ({
   );
 };
 
-interface AddDictionaryPopFormPropsType {
-  isShow: boolean
-}
+const AddDictionaryPopForm = () => {
 
-const AddDictionaryPopForm = (props: AddDictionaryPopFormPropsType) => {
+  // const { configurationAndDictionary, dispatch } = props;
+  // let isShow = configurationAndDictionary.pageState.addPopFormShow ?? false;
 
-  const [visible, setVisible] = useState(props.isShow);
+  let isShow = useSelector((state) => {
+      console.log(state);
+      return state[`${setting.configName}`]?.pageState?.addPopFormShow ?? false;
+    }),
+    dispatch = useDispatch();
+
+  const switchSelfShow = (_isShow: boolean) => dispatch({
+    type: 'configurationAndDictionary/showAddForm',
+    payload: {
+      pageState: { addPopFormShow: _isShow },
+    } as StateType,
+  });
+
 
   const onCreate = (values) => {
     console.log('Received values of form: ', values);
-    setVisible(false);
+    switchSelfShow(false);
   };
   return (
     <div className={styles.container}>
@@ -95,16 +107,16 @@ const AddDictionaryPopForm = (props: AddDictionaryPopFormPropsType) => {
           <Button
             type="primary"
             onClick={() => {
-              setVisible(true);
+              switchSelfShow(true);
             }}
           >
             New Collection
           </Button>
           <CollectionCreateForm
-            visible={visible}
+            visible={isShow}
             onCreate={onCreate}
             onCancel={() => {
-              setVisible(false);
+              switchSelfShow(false);
             }}
           />
         </div>
@@ -113,8 +125,13 @@ const AddDictionaryPopForm = (props: AddDictionaryPopFormPropsType) => {
   );
 };
 
-export default connect(
-  ({ configurationAndDictionary, isShow }: { configurationAndDictionary: StateType, isShow: boolean }) => ({
-    configurationAndDictionary, isShow,
-  }),
-)(AddDictionaryPopForm);
+// export default connect(
+//   ({
+//      configurationAndDictionary,
+//    }: {
+//     configurationAndDictionary: StateType,
+//   }) => ({
+//     configurationAndDictionary,
+//   }),
+// )(AddDictionaryPopForm);
+export default AddDictionaryPopForm;

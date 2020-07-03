@@ -92,14 +92,14 @@ export default defineConfig({
       layout: true,
       routes: [
         {
-          name: 'configuration.formConfigs',
+          name: 'configuration.formConfigs.title',
           icon: 'smile',
           layout: true,
           path: '/configuration/formconfigs',
           component: './Configuration/FormConfigs',
         },
         {
-          name: 'configuration.dictionary',
+          name: 'configuration.dictionary.title',
           icon: 'smile',
           layout: true,
           path: '/configuration/dictionary',

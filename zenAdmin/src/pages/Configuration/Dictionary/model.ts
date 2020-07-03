@@ -8,19 +8,19 @@ export interface StateType {
   pageState: DictionaryPageStateType;
 }
 
-export interface ModelType {
+export interface DictionaryDVAType {
   namespace: string;
   state: StateType;
   effects: {
     fetch: Effect;
-    showAddForm:Effect;
+    showAddForm: Effect;
   };
   reducers: {
     save: Reducer<StateType>;
   };
 }
 
-const Model: ModelType = {
+const Model: DictionaryDVAType = {
   namespace: 'configurationAndDictionary',
 
   state: {

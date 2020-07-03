@@ -52,7 +52,7 @@ export default {
   'menu.modules.title':'模块化设置',
   'menu.wxapp.title':'微信小程序',
   'menu.configuration.title':'配置中心',
-  'menu.configuration.formConfigs.title':'表单配置',
-  'menu.configuration.dictionary.title':'数据字典',
+  'menu.configuration.title.configuration.dictionary.title':'数据字典',
+  'menu.configuration.title.configuration.formConfigs.title':'表单配置'
 
 };
