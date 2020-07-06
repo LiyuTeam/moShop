@@ -1,34 +1,33 @@
 import { Effect, Reducer } from 'umi';
 
-import { CardListItemDataType, DictionaryPageStateType } from './data.d';
+import { DictionaryListType } from './data.d';
 import { queryFakeList } from './service';
+import { ModuleSymbol } from './index';
 
-export interface StateType {
-  list: CardListItemDataType[];
-  pageState: DictionaryPageStateType;
+export interface DictionaryPagesStateType {
+  showAddForm: boolean;
+  dictionaryList: DictionaryListType[];
 }
 
 export interface DictionaryDVAType {
   namespace: string;
-  state: StateType;
+  state: DictionaryPagesStateType;
   effects: {
     fetch: Effect;
-    showAddForm: Effect;
+    setShowAddForm: Effect;
   };
   reducers: {
-    save: Reducer<StateType>;
+    save: Reducer<DictionaryPagesStateType>;
   };
 }
 
 const Model: DictionaryDVAType = {
-  namespace: 'configurationAndDictionary',
+  namespace: ModuleSymbol.toString(),
 
   state: {
-    list: [],
-    pageState: {
-      addPopFormShow: false,
-    },
-  },
+    dictionaryList: [],
+    showAddForm: false,
+  } as DictionaryPagesStateType,
 
   effects: {
     * fetch({ payload }, { call, put }) {
@@ -39,10 +38,10 @@ const Model: DictionaryDVAType = {
       });
     },
 
-    * showAddForm({ payload }, { call, put }) {
+    * setShowAddForm({ payload }, { call, put }) {
       yield put({
         type: 'save',
-        payload: payload,
+        payload: { showAddForm: Boolean(payload) } as DictionaryPagesStateType,
       });
     },
   },

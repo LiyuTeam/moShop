@@ -1,9 +1,8 @@
 import styles from './index.less';
-import React, { useEffect, useState } from 'react';
-import { Button, Modal, Form, Input, Radio } from 'antd';
-import { connect, useDispatch, useSelector } from '@@/plugin-dva/exports';
-import { DictionaryDVAType, StateType } from '@/pages/Configuration/Dictionary/model';
-import { Dispatch } from '@@/plugin-dva/connect';
+import React from 'react';
+import { Modal, Form, Input, Radio } from 'antd';
+import { useDispatch, useSelector } from '@@/plugin-dva/exports';
+import { DictionaryPagesStateType } from '@/pages/Dictionary/model';
 
 interface Values {
   title: string;
@@ -82,17 +81,17 @@ const AddDictionaryPopForm = () => {
   // const { configurationAndDictionary, dispatch } = props;
   // let isShow = configurationAndDictionary.pageState.addPopFormShow ?? false;
 
-  let isShow = useSelector((state) => {
+  let isShow = useSelector((state: { dictionary: DictionaryPagesStateType }) => {
       console.log(state);
-      return state[`${setting.configName}`]?.pageState?.addPopFormShow ?? false;
+      return state.dictionary.showAddForm;
     }),
     dispatch = useDispatch();
 
   const switchSelfShow = (_isShow: boolean) => dispatch({
     type: 'configurationAndDictionary/showAddForm',
     payload: {
-      pageState: { addPopFormShow: _isShow },
-    } as StateType,
+      showAddForm: _isShow,
+    } as DictionaryPagesStateType,
   });
 
 
@@ -104,14 +103,6 @@ const AddDictionaryPopForm = () => {
     <div className={styles.container}>
       <div id="components-form-demo-form-in-modal">
         <div>
-          <Button
-            type="primary"
-            onClick={() => {
-              switchSelfShow(true);
-            }}
-          >
-            New Collection
-          </Button>
           <CollectionCreateForm
             visible={isShow}
             onCreate={onCreate}
@@ -125,13 +116,4 @@ const AddDictionaryPopForm = () => {
   );
 };
 
-// export default connect(
-//   ({
-//      configurationAndDictionary,
-//    }: {
-//     configurationAndDictionary: StateType,
-//   }) => ({
-//     configurationAndDictionary,
-//   }),
-// )(AddDictionaryPopForm);
 export default AddDictionaryPopForm;

@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Request, Response } from 'express';
-import { CardListItemDataType } from './data.d';
+import { DictionaryListType } from './data.d';
 
 const titles = [
   'Alipay',
@@ -50,7 +50,7 @@ const user = [
   '仲尼',
 ];
 
-function fakeList(count: number): CardListItemDataType[] {
+function fakeList(count: number): DictionaryListType[] {
   const list = [];
   for (let i = 0; i < count; i += 1) {
     list.push({

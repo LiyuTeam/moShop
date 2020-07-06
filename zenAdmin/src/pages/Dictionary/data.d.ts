@@ -4,7 +4,7 @@ export interface Member {
   id: string;
 }
 
-export interface CardListItemDataType {
+export interface DictionaryListType {
   id: string;
   owner: string;
   title: string;

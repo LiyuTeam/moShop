@@ -1,9 +1,9 @@
 // https://umijs.org/config/
-import {defineConfig} from 'umi';
+import { defineConfig } from 'umi';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
 
-const {REACT_APP_ENV} = process.env;
+const { REACT_APP_ENV } = process.env;
 export default defineConfig({
   hash: true,
   antd: {},
@@ -98,16 +98,16 @@ export default defineConfig({
           path: '/configuration/formconfigs',
           component: './Configuration/FormConfigs',
         },
-        {
-          name: 'configuration.dictionary.title',
-          icon: 'smile',
-          layout: true,
-          path: '/configuration/dictionary',
-          component: './Configuration/Dictionary',
-        },
+
       ],
     },
-
+    {
+      name: 'dictionary.title',
+      icon: 'smile',
+      layout: true,
+      path: '/dictionary',
+      component: './Dictionary',
+    },
     {
       component: './404',
     },

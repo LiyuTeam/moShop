@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './index.less';
-import DictionaryPage from "@/pages/Configuration/Dictionary";
+import DictionaryPage from "@/pages/Dictionary";
 import {useLocation} from 'umi';
 
 const subPageMap = new Map([
