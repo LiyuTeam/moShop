@@ -28,21 +28,13 @@ const
         payload: isShow,
       });
 
-    // let
-    //   [dictList, setDictList] = useState(dictionaryList);
-
     useEffect(() => {
       logger.log('component update effect', dictionaryList);
       dispatch({
         type: `${ModuleSymbol}/fetch`,
         payload: '',
       });
-      // setDictList(dictionaryList);
     }, []);
-
-    // useEffect(() => {
-    //   logger.log('dictList Update effect', dictList);
-    // }, [dictionaryList]);
 
     const content = (
       <div className={styles.pageHeaderContent}>
