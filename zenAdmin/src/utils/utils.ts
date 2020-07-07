@@ -24,3 +24,10 @@ export const isAntDesignProOrDev = (): boolean => {
 export const getPageQuery = () => parse(window.location.href.split('?')[1]);
 
 export const getClassnames = (...names: string[][]) => names.map(sub => sub.join('-')).join(' ');
+
+//  全局log
+export const Logger = (name: string) => ({
+  log: function(msg: string, ...props: any[]) {
+    console.log(`${name} ${msg}`, ...props);
+  },
+});

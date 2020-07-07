@@ -1,34 +1,48 @@
-import { PlusOutlined } from '@ant-design/icons';
+import React, { useEffect, } from 'react';
+import { Loading } from 'umi';
 import { Button, Card, List, Typography } from 'antd';
-import React from 'react';
+import { PlusOutlined } from '@ant-design/icons';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { connect, Loading } from 'umi';
-import { DictionaryPagesStateType } from './model';
-import { DictionaryListType } from './data.d';
-import styles from './style.less';
-import AddDictionaryPopForm from './AddDictionaryPopForm';
 import { useDispatch, useSelector } from '@@/plugin-dva/exports';
-import { CurrentUser } from '@/pages/Modules/data';
 
-export const ModuleSymbol = Symbol('Dictionary');
+import { DictionaryListType } from './data.d';
+import AddDictionaryPopForm from './AddDictionaryPopForm';
+import styles from './style.less';
+import { Logger } from '@/utils/utils';
+
+export const ModuleSymbol = 'Dictionary';
 
 const
   { Paragraph } = Typography,
+  logger = Logger(ModuleSymbol),
   DictionaryPage = () => {
 
     const
       dispatch = useDispatch(),
-      { dictionaryList } = useSelector((state: { dictionary: DictionaryPagesStateType }) => state.dictionary),
-      { loading } = useSelector((state: { loading: Loading }) => state.loading.models[ModuleSymbol.toString()]),
+      dictionaryList = useSelector(state => state[ModuleSymbol].dictionaryList),
+      loadingEffect = useSelector((state: { loading: Loading }) => state.loading),
+      loading = loadingEffect.effects[ModuleSymbol],
       nullData: Partial<DictionaryListType> = {},
-      showAddFormAction = (isShow: boolean) => {
-        dispatch({
-          type: 'dictionary/showAddForm',
-          payload: {
-            showAddForm: isShow,
-          } as DictionaryPagesStateType,
-        });
-      };
+      showAddFormAction = (isShow: boolean) => dispatch({
+        type: `${ModuleSymbol}/setShowAddForm`,
+        payload: isShow,
+      });
+
+    // let
+    //   [dictList, setDictList] = useState(dictionaryList);
+
+    useEffect(() => {
+      logger.log('component update effect', dictionaryList);
+      dispatch({
+        type: `${ModuleSymbol}/fetch`,
+        payload: '',
+      });
+      // setDictList(dictionaryList);
+    }, []);
+
+    // useEffect(() => {
+    //   logger.log('dictList Update effect', dictList);
+    // }, [dictionaryList]);
 
     const content = (
       <div className={styles.pageHeaderContent}>
@@ -42,15 +56,7 @@ const
           <List<Partial<DictionaryListType>>
             rowKey="id"
             loading={loading}
-            grid={{
-              gutter: 16,
-              xs: 1,
-              sm: 2,
-              md: 3,
-              lg: 3,
-              xl: 4,
-              xxl: 4,
-            }}
+            grid={{ gutter: 16, xs: 2, sm: 4, md: 4, lg: 6, xl: 6, xxl: 6 }}
             dataSource={[nullData, ...dictionaryList]}
             renderItem={(item: Partial<DictionaryListType>) => {
               if (item && item.id) {
@@ -77,18 +83,19 @@ const
                     </Card>
                   </List.Item>
                 );
-              } else {
-                return '';
               }
+              return (
+                <List.Item>
+                  <Button type="dashed" className={styles.newButton}
+                          onClick={e => showAddFormAction(true)}>
+                    <PlusOutlined/> 新增字典
+                  </Button>
+                  <AddDictionaryPopForm/>
+                </List.Item>
+              );
+
             }}
           >
-            <List.Item>
-              <Button type="dashed" className={styles.newButton}
-                      onClick={e => showAddFormAction(true)}>
-                <PlusOutlined/> 新增产品
-              </Button>
-              <AddDictionaryPopForm/>
-            </List.Item>
           </List>
         </div>
       </PageHeaderWrapper>

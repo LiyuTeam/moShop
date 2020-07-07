@@ -3,115 +3,104 @@ import React from 'react';
 import { Modal, Form, Input, Radio } from 'antd';
 import { useDispatch, useSelector } from '@@/plugin-dva/exports';
 import { DictionaryPagesStateType } from '@/pages/Dictionary/model';
-
-interface Values {
-  title: string;
-  description: string;
-  modifier: string;
-}
+import { ModuleSymbol } from '../index';
+import { dictionaryFieldsType } from '@/pages/Dictionary/AddDictionaryPopForm/data';
 
 interface CollectionCreateFormProps {
   visible: boolean;
-  onCreate: (values: Values) => void;
+  onCreate: (values: dictionaryFieldsType) => void;
   onCancel: () => void;
 }
 
-const CollectionCreateForm: React.FC<CollectionCreateFormProps> = ({
-                                                                     visible,
-                                                                     onCreate,
-                                                                     onCancel,
-                                                                   }) => {
-  const [form] = Form.useForm();
-  return (
-    <Modal
-      visible={visible}
-      title="Create a new collection"
-      okText="Create"
-      cancelText="Cancel"
-      onCancel={onCancel}
-      onOk={() => {
-        form
-          .validateFields()
-          .then((values) => {
-            form.resetFields();
-            onCreate(values);
-          })
-          .catch((info) => {
-            console.log('Validate Failed:', info);
-          });
-      }}
-    >
-      <Form
-        form={form}
-        layout="vertical"
-        name="form_in_modal"
-        initialValues={{ modifier: 'public' }}
+const CollectionCreateForm: React.FC<CollectionCreateFormProps> =
+  ({
+     visible,
+     onCreate,
+     onCancel,
+   }) => {
+    const [form] = Form.useForm();
+    return (
+      <Modal
+        visible={visible}
+        title="Create a new collection"
+        okText="Create"
+        cancelText="Cancel"
+        onCancel={onCancel}
+        onOk={() => {
+          form
+            .validateFields()
+            .then((values) => {
+              form.resetFields();
+              onCreate(values as dictionaryFieldsType);
+            })
+            .catch((info) => {
+              console.log('Validate Failed:', info);
+            });
+        }}
       >
-        <Form.Item
-          name="title"
-          label="Title"
-          rules={[
-            {
-              required: true,
-              message: 'Please input the title of collection!',
-            },
-          ]}
+        <Form
+          form={form}
+          layout="vertical"
+          name="form_in_modal"
+          initialValues={{ modifier: 'public' }}
         >
-          <Input/>
-        </Form.Item>
-        <Form.Item name="description" label="Description">
-          <Input type="textarea"/>
-        </Form.Item>
-        <Form.Item
-          name="modifier"
-          className="collection-create-form_last-form-item"
-        >
-          <Radio.Group>
-            <Radio value="public">Public</Radio>
-            <Radio value="private">Private</Radio>
-          </Radio.Group>
-        </Form.Item>
-      </Form>
-    </Modal>
-  );
-};
+          <Form.Item
+            name="title"
+            label="Title"
+            rules={[
+              {
+                required: true,
+                message: 'Please input the title of collection!',
+              },
+            ]}
+          >
+            <Input/>
+          </Form.Item>
+          <Form.Item name="description" label="Description">
+            <Input type="textarea"/>
+          </Form.Item>
+          <Form.Item
+            name="modifier"
+            className="collection-create-form_last-form-item"
+          >
+            <Radio.Group>
+              <Radio value="public">Public</Radio>
+              <Radio value="private">Private</Radio>
+            </Radio.Group>
+          </Form.Item>
+        </Form>
+      </Modal>
+    );
+  };
 
 const AddDictionaryPopForm = () => {
 
-  // const { configurationAndDictionary, dispatch } = props;
-  // let isShow = configurationAndDictionary.pageState.addPopFormShow ?? false;
-
-  let isShow = useSelector((state: { dictionary: DictionaryPagesStateType }) => {
-      console.log(state);
-      return state.dictionary.showAddForm;
-    }),
+  let { showAddForm } = useSelector(state => state[ModuleSymbol] as DictionaryPagesStateType),
     dispatch = useDispatch();
 
-  const switchSelfShow = (_isShow: boolean) => dispatch({
-    type: 'configurationAndDictionary/showAddForm',
-    payload: {
-      showAddForm: _isShow,
-    } as DictionaryPagesStateType,
-  });
+  const
+    switchShowAction = async (_isShow: boolean) => await dispatch({
+      type: `${ModuleSymbol}/setShowAddForm`,
+      payload: _isShow,
+    }),
+    updateDictionaryListAction = async (item: any) => await dispatch({
+      type: `${ModuleSymbol}/addDictionaryList`,
+      payload: item,
+    });
 
 
-  const onCreate = (values) => {
+  const onCreate = async (values: any) => {
     console.log('Received values of form: ', values);
-    switchSelfShow(false);
+    await updateDictionaryListAction(values);
+    await switchShowAction(false);
   };
   return (
     <div className={styles.container}>
-      <div id="components-form-demo-form-in-modal">
-        <div>
-          <CollectionCreateForm
-            visible={isShow}
-            onCreate={onCreate}
-            onCancel={() => {
-              switchSelfShow(false);
-            }}
-          />
-        </div>
-      </div>
+      <CollectionCreateForm
+        visible={showAddForm}
+        onCreate={onCreate}
+        onCancel={async () => await switchShowAction(false)}
+      />
     </div>
   );
 };
