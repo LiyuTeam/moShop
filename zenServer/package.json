@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "apollo-server-koa": "^2.14.3",
-    "class-validator": "^0.12.2",
+    "class-validator": "^0.14.0",
     "data-forge": "^1.8.9",
     "dataloader": "^2.0.0",
     "egg": "^2.6.1",
